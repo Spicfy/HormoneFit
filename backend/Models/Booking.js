@@ -21,19 +21,27 @@ const BookingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    status: {
-        type: String,
-        enum: ['pending', 'confirmed', 'cancelled'],
-        default: 'pending'
-    },
+    userDate: {type: Object, required: true},
+    doctorDate: {type: Object, required: true},
     type:{
         type: String,
-        enum: ['Initial Consultation', 'Follow-up Appointment', 'Urgent Care' ],
+        enum: ['Initial Consultation', 'Follow-up Appointment', 'Urgent Care'],
         required: true
     },
-    price: {
+    fee: {
         type: Number,
         required: true
+    },
+    cancelled: {
+        type: Boolean,
+        default: false
+    },
+
+    payment: {type: Boolean, default: false},
+
+    isCompleted: {
+        type: Boolean,
+        default: false
     }
 
 })

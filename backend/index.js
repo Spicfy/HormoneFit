@@ -3,10 +3,11 @@ import cors from 'cors' //to enable CORS for the backend server
 import connectDB from './configs/db.js';
 import 'dotenv/config'; //to load environment variables from .env file
 import authRoutes from './routes/authRoutes.js'; //importing auth routes
-
+import connectCloudinary from "./configs/cloudinary.js";
 
 
 connectDB();
+connectCloudinary(); //connect to cloudinary for image uploads
 //load environment variables from .env file
 const app = express();
 

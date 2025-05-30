@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
     _id: {
-        type: String, required: true
+        type: String, required: true, unique: true
     },
     first_name: {
         type: String, required: true
@@ -17,10 +17,11 @@ const UserSchema = new mongoose.Schema({
         type: String, required: true
     },
     profile_picture: {
-        type: String
+        type: String // need to add default for profile picture
     },
     address: {
-        type: String
+        type: String,
+        required: true
     },
     phone: {
         type: String
