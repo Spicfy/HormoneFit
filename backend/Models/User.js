@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     _id: {
-        type: String, required: true
-    },
+        type: String, required: true},
     first_name: {
         type: String, required:true
     },
@@ -17,7 +16,7 @@ const userSchema = new mongoose.Schema({
         type: String, required: true
     },
     profile_picture: {
-        type: String, 
+        type: String,
     },
     role: {type: String, enum: ['user', 'doctor'], default: 'user'},
     address: {
