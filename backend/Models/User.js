@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     _id: {
         type: String, required: true
     },
     first_name: {
-        type: String, required:true
+        type: String, required: true
     },
     last_name: {
         type: String, required: true
@@ -17,11 +17,34 @@ const userSchema = new mongoose.Schema({
         type: String, required: true
     },
     profile_picture: {
-        type: String, 
+        type: String
     },
-    role: {type: String, enum: ['user', 'doctor'], default: 'user'},
     address: {
-        type: String,
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    date_of_birth: {
+        type: Date,
+        required: true
+    },
+    gender: {
+        type: String, enum: ['male', 'female', 'other'],
+        required: true
 
-    }
-}, {timestamps: true})
+    },
+    emergency_contact: {
+        name: { type: String },
+        phone: { type: String },
+        relationship: { type: String }
+    },
+    medical_history: [{
+        condition: String,
+        date_diagnosed: Date,
+        notes: String
+    }]
+}, { timestamps: true });
+
+const User = mongoose.model('User', UserSchema);
+export default User; 
