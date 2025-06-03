@@ -10,192 +10,182 @@ export default function Home() {
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
 			<Header />
-			<main className="font-[family-name:var(--font-domine)]  text-blacktxt flex flex-col items-center">
-				<div className="px-8 flex flex-row h-[calc(100vh-80px)] items-center justify-around w-full bg-primary">
-					<div className="flex flex-col w-1/2 space-y-6">
+			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
+				{/* Modern Hero Section Start */}
+				<section className="w-full bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+					
+				<div className="max-w-xl space-y-10 md:ml-30 lg:ml-30">
+
 						<div className="flex items-center text-accent1 text-2xl">
-							★★★★★
-							<p className="ml-3 text-lg text-blacktxt">
-								25,000+ Reviews Reviews
+							<span className="flex flex-row gap-1">
+								{Array.from({ length: 5 }).map((_, i) => (
+									<img key={i} src="/star-1.svg" alt="star" style={{ width: 28, height: 28 }} />
+								))}
+							</span>
+							<p className="ml-3 text-lg text-blacktxt font-medium">
+								25,000+ Reviews
 							</p>
 						</div>
-
-						<h1 className="font-bold text-6xl">
-							Personalized <br /> Menopause
-							<br /> Care for Canadians
+						<h1 className="font-bold text-5xl md:text-6xl leading-tight">
+							Personalized <br /> Menopause <br /> Care for Canadians
 						</h1>
 						<h2 className="font-medium text-lg text-black opacity-75">
-							Personalized menopause care — without the waiting
-							room
+							Personalized menopause care — without the waiting room
 						</h2>
-						<div className="text-whitetxt flex flex-row gap-4 font-[family-name:var(--font-geist-sans)]">
+						<div className="flex flex-row gap-4 mt-6">
 							<a
 								href=""
-								className="bg-accent1 px-6 py-4 rounded-xl font-bold"
+								className="bg-gradient-to-r from-accent1 to-accent2 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
 							>
 								Take the Quiz
 							</a>
 							<a
 								href=""
-								className="bg-accent1 px-6 py-4 rounded-xl font-bold"
+								className="bg-white text-accent1 border border-accent1 px-8 py-4 rounded-xl font-bold shadow-md hover:bg-accent1 hover:text-white transition"
 							>
 								Get Started
 							</a>
 						</div>
 					</div>
-					<div className="w-2/5 bg-ominous h-1/2"></div>
-				</div>
-				<div className="w-7/8 rounded-3xl outline-2 outline-[#B1A8A8] h-20 bg-white flex flex-row items-center justify-around">
-					<div className="flex flex-row items-center gap-x-3">
-						<img src="heart.svg" alt="" className="size-10" />
-						<p>Trusted by 1,000,000 doctors</p>
-					</div>
-					<div className="flex flex-row items-center gap-x-3">
-						<img
-							src="stethoscope.svg"
-							alt=""
-							className="size-14 "
-						/>
-						<p>Licensed healthcare experts</p>
-					</div>
-					<div className="flex flex-row items-center gap-x-3">
-						<img src="maple-leaf.svg" alt="" className="size-14" />
-						<p>Canadian Owned</p>
-					</div>
-				</div>
-				<div className="flex flex-row justify-between mt-20 w-full h-[70vh] px-8">
-					<div className="w-[46vw] h-full flex flex-col justify-between">
-						<div className="bg-accent1 w-full h-[35%] rounded-4xl"></div>
-						<div className="bg-accent1 w-full h-[60%] rounded-4xl"></div>
-					</div>
-					<div className="w-[46vw] h-full flex flex-col justify-between">
-						<div className="bg-accent1 w-full h-[60%] rounded-4xl"></div>
-						<div className="bg-accent1 w-full h-[35%] rounded-4xl"></div>
-					</div>
-				</div>
-				<div className="mt-20 w-[90vw] h-0.5 bg-gray-300"></div>
+				</section>
+				{/* Modern Hero Section End */}
 
-				<div className="w-full px-8 py-16">
-					<div className="px-6 flex justify-between  mb-14">
-						<div className="max-w-md">
+				{/* Modern Info Bar Start */}
+				<div className="w-full flex justify-center -mt-10">
+					<div className="backdrop-blur-md bg-white/80 border border-[#E0E0E0] rounded-3xl shadow-xl px-12 py-3 flex flex-col md:flex-row items-center justify-around gap-6 w-11/12 md:w-4/5">
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/heart.svg" alt="" className="w-8 h-8" />
+							<p className="font-medium">Trusted by 1,000,000 patients</p>
+						</div>
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/stethoscope.svg" alt="" className="w-10 h-10" />
+							<p className="font-medium">Licensed healthcare professionals</p>
+						</div>
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/maple-leaf.svg" alt="" className="w-10 h-10" />
+							<p className="font-medium">Canadian Owned</p>
+						</div>
+					</div>
+				</div>
+				{/* Modern Info Bar End */}
+
+				{/* Boxes Section Start */}
+				<div className="flex justify-center mt-32 w-full px-4">
+				<div className="w-11/12 md:w-4/5 flex flex-row justify-between h-[80vh] gap-8">
+					<div className="w-1/2 h-full flex flex-col justify-between gap-4">
+					<div className="w-full h-[35%] rounded-4xl border border-gray-300"></div>
+					<div className="w-full h-[60%] rounded-4xl border border-gray-300"></div>
+					</div>
+					<div className="w-1/2 h-full flex flex-col justify-between gap-4">
+					<div className="w-full h-[60%] rounded-4xl border border-gray-300"></div>
+					<div className="w-full h-[35%] rounded-4xl border border-gray-300"></div>
+					</div>
+				</div>
+				</div>
+				{/* Boxes Section End */}
+
+					<div className="w-full px-10 md:px-40 py-20">
+						<div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 mb-14">
+							<div className="max-w-md text-center md:text-left">
 							<p className="text-lg">
 								From brain fog to sleep issues, menopause
 								impacts more than people realize. The right
 								support can restore balance — and put you back
 								in control.
 							</p>
-							<button className="mt-6 bg-accent1 text-white px-6 py-3 rounded-lg">
+							<a
+								href=""
+								className="mt-5 inline-block bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
+								>
 								Get Started
-							</button>
+							</a>
+							</div>
+							<h2 className="text-4xl md:text-5xl font-bold text-center md:text-right leading-tight">
+								Your Hormones, Your<br />
+								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
+									Health, Your Power
+								</span>
+							</h2>
 						</div>
-						<h2 className="text-5xl font-bold text-right">
-							Your Hormones, Your
-							<br />
-							Health, Your Power
-						</h2>
-					</div>
+						
 
-					<div className="grid grid-cols-4 gap-16 mb-6 px-16">
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Brain Fog
-							</h3>
-							<div className="text-3xl">≈</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Bladder issues
-							</h3>
-							<div className="text-3xl">💧</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Vaginal discomfort
-							</h3>
-							<div className="text-3xl">☹</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Disrupted sleep
-							</h3>
-							<div className="text-3xl">🌙</div>
-						</div>
-					</div>
-
-					<div className="grid grid-cols-4 gap-16 px-16">
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Hot flashes
-							</h3>
-							<div className="text-3xl">☀</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Weight Gain
-							</h3>
-							<div className="text-3xl">⚖</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Joint pain
-							</h3>
-							<div className="text-3xl">⚡</div>
-						</div>
-						<div className="p-8 border border-gray-200 rounded-lg">
-							<h3 className="text-xl font-medium mb-4">
-								Decreased libido
-							</h3>
-							<div className="text-3xl">♡</div>
-						</div>
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+						{[
+							{ title: "Brain Fog", icon: "/fog.svg", description: "Trouble focusing or remembering" },
+							{ title: "Bladder Issues", icon: "/tear.svg", description: "Frequent or urgent urination" },
+							{ title: "Vaginal Discomfort", icon: "/sad.svg", description: "Dryness or irritation" },
+							{ title: "Disrupted Sleep", icon: "/sleep.svg", description: "Hard to fall or stay asleep" },
+							{ title: "Hot Flashes", icon: "/sun.svg", description: "Sudden heat and sweating" },
+							{ title: "Weight Gain", icon: "/scale.svg", description: "Increased belly fat" },
+							{ title: "Joint Pain", icon: "/bolt.svg", description: "Achy or stiff joints" },
+							{ title: "Decreased Libido", icon: "/heart.svg", description: "Lower sex drive" },
+						].map((item, idx) => (
+							<div
+								key={idx}
+								className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow p-8 flex flex-col items-center justify-center min-h-[170px] group border border-gray-100"
+							>
+								<div className="mb-4 group-hover:scale-110 transition-transform">
+									<Image src={item.icon} alt="icon" width={40} height={40} style={{ filter: 'invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0.5)' }} />
+								</div>
+								<h3 className="text-lg font-semibold text-center group-hover:text-accent1 transition-colors text-gray-800">{item.title}</h3>
+								<p className="text-sm text-center text-gray-700 mt-2">{item.description}</p>
+							</div>
+						))}
 					</div>
 				</div>
-				<div className="mt-10 w-[90vw] h-0.5 bg-gray-300"></div>
 
 				<div className="pt-16 w-full">
-					<h3 className="ml-10 mb-10 font-bold text-4xl">
-						How Hormne Fit Works
-					</h3>
-					<div className=" flex flex-row justify-center gap-20 mb-32">
-						<div className="flex flex-col items-center text-center">
-							<div className="w-16 h-16 rounded-full bg-[#FFD6D6] flex items-center justify-center text-xl mb-8">
-								1
+					<h3 className="ml-40 mb-16 font-bold text-4xl">How Hormone Fit Works</h3>
+					<div className="max-w-6xl mx-auto flex flex-col gap-20">
+						{/* Step 1 */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+							<div>
+								<p className="text-gray-500 mb-2">Step 1</p>
+								<h4 className="text-2xl font-semibold mb-2">Take the Quiz</h4>
+								<p className="text-gray-600">Complete our comprehensive assessment to help us understand your unique symptoms and health history</p>
 							</div>
-							<h3 className="text-xl font-semibold mb-4">
-								Take our quiz
-							</h3>
-							<p className="text-gray-600 max-w-xs">
-								Answer a few questions about your symptoms and
-								health history
-							</p>
+							<div className="flex justify-center">
+								<img
+									src="/mock.png"
+									alt="Step 1"
+									className="rounded-xl shadow-lg w-full max-w-md object-cover"
+								/>
+							</div>
 						</div>
-						<div className="flex flex-col items-center text-center">
-							<div className="w-16 h-16 rounded-full bg-[#FFD6D6] flex items-center justify-center text-xl mb-8">
-								2
+						{/* Step 2 */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+							<div className="order-2 md:order-1 flex justify-center">
+								<img
+									src="/mock.png"
+									alt="Step 2"
+									className="rounded-xl shadow-lg w-full max-w-md object-cover"
+								/>
 							</div>
-							<h3 className="text-xl font-semibold mb-4">
-								Connect with a doctor
-							</h3>
-							<p className="text-gray-600 max-w-xs">
-								Schedule a virtual consultation with a licensed
-								healthcare provider
-							</p>
+							<div className="order-1 md:order-2">
+								<p className="text-gray-500 mb-2">Step 2</p>
+								<h4 className="text-2xl font-semibold mb-2">Connect with Specialists</h4>
+								<p className="text-gray-600">Meet with Canadian menopause specialists via secure video call to discuss your personalized care plan</p>
+							</div>
 						</div>
-						<div className="flex flex-col items-center text-center">
-							<div className="w-16 h-16 rounded-full bg-[#FFD6D6] flex items-center justify-center text-xl mb-8">
-								3
+						{/* Step 3 */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+							<div>
+								<p className="text-gray-500 mb-2">Step 3</p>
+								<h4 className="text-2xl font-semibold mb-2">Ongoing Care</h4>
+								<p className="text-gray-600">Receive your personalized treatment plan </p>
 							</div>
-							<h3 className="text-xl font-semibold mb-4">
-								Get personalized care
-							</h3>
-							<p className="text-gray-600 max-w-xs">
-								Receive a customized treatment plan tailored to
-								your needs
-							</p>
+							<div className="flex justify-center">
+								<img
+									src="/mock.png"
+									alt="Step 3"
+									className="rounded-xl shadow-lg w-full max-w-md object-cover"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="px-8">
+				<div className="px-10">
 					<h3 className="mb-10 font-bold text-4xl">
 						By Canadians For Canadians
 					</h3>
@@ -203,7 +193,11 @@ export default function Home() {
 						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
 							<div className="bg-black text-white p-6 rounded-xl h-[60%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									Amazing service and support throughout my
@@ -213,7 +207,11 @@ export default function Home() {
 							</div>
 							<div className="bg-black text-white p-6 rounded-xl h-[40%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									Finally found relief from my symptoms. Thank
@@ -225,7 +223,11 @@ export default function Home() {
 						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
 							<div className="bg-black text-white p-6 rounded-xl h-[40%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									The virtual consultations are so convenient.
@@ -235,7 +237,11 @@ export default function Home() {
 							</div>
 							<div className="bg-black text-white p-6 rounded-xl h-[60%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									Comprehensive care that actually addresses
@@ -247,7 +253,11 @@ export default function Home() {
 						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
 							<div className="bg-black text-white p-6 rounded-xl h-[50%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									Life-changing results. The personalized
@@ -257,7 +267,11 @@ export default function Home() {
 							</div>
 							<div className="bg-black text-white p-6 rounded-xl h-[50%]">
 								<div className="flex text-[#FFD6D6] mb-2">
-									★★★★★
+									<span className="flex flex-row gap-1">
+										{Array.from({ length: 5 }).map((_, i) => (
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+										))}
+									</span>
 								</div>
 								<p className="mb-4">
 									Expert guidance and support every step of
