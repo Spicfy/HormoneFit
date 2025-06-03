@@ -1,9 +1,20 @@
 // API to book appointment
-import Booking from "../Models/Booking";
-import Doctor from "../Models/Doctor";
-import User from "../Models/User";
+import Appointment from "../Models/Appointment.js";
+import Doctor from "../Models/Doctor.js";
+import User from "../Models/User.js";
+import {
+    getAvailableSlots,
+    createSingleUseLink,
+    getAppointmentDetails,
+    cancelAppointment as cancelCalendlyAppointment,
+    getCurrentUser,
+    getEventTypes
+} from "../services/calendly.js";
 
-const bookAppointment = async (req, res) => {
+
+
+
+export const bookAppointment = async (req, res) => {
     try{
         const {userId, doctorId, date, time, type} = req.body
 
@@ -15,8 +26,8 @@ const bookAppointment = async (req, res) => {
         if(!userData){
             return res.json({success: false, message: "User not found."});
         }
-        const booking = new Booking({
-            _id: new mongoose.Types.ObjectId().toString(),
+        const booking = new Appointment({
+
             user_id: userId,
             doctor_id: doctorId,
             appointment_date: date,
@@ -25,6 +36,10 @@ const bookAppointment = async (req, res) => {
             fee: docData.doctor_fee
         })
         const savedBooking = await booking.save();
+
+
+        await doctorModel.findByIdAndUpdate(doctorId, {slots_booked});
+
         res.json({success: true, message: "Appointment booked successfully", booking: savedBooking});
         
 
@@ -32,4 +47,22 @@ const bookAppointment = async (req, res) => {
     }catch(error){
         res.json({success: false, message: error.message})
     }
+    //cancel appointment API
+ 
 }
+    export const cancelAppointment = async (req, res) => {
+        try{
+            const {userId, AppointmentId} = req.body;
+
+            const bookingData = await Appointment.findById(bookingId);
+            //verify appointment user
+            if(bookingData.user_id !== userId){
+                return res.json({success: false, message: "You are not authorized to cancel to cancel this appointment."})
+            }
+            await Appointment.findByIdAndUpdate()
+            
+
+        }catch(error){
+        res.json({success: false, message: error.message});
+    }
+    }
