@@ -1,20 +1,22 @@
 import express from "express";
-import cors from "cors" //to enable CORS for the backend server
+import cors from 'cors' //to enable CORS for the backend server
 import connectDB from './configs/db.js';
 import 'dotenv/config'; //to load environment variables from .env file
 import authRoutes from './routes/authRoutes.js'; //importing auth routes
-
+import connectCloudinary from "./configs/cloudinary.js";
 
 
 connectDB();
+connectCloudinary(); //connect to cloudinary for image uploads
 //load environment variables from .env file
 const app = express();
+
+app.use(express.json());
 app.use(cors())
 
-app.use(express.json()) //allows us to parse incoming requests: req.body
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 //API endpoints for testing
 app.get('/', (req, res) => {
