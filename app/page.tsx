@@ -3,9 +3,40 @@
 import Header from "@/components/header";
 import Image from "next/image";
 import { useState } from "react";
+import React from "react";
+
+const reviews = [
+	{
+		text: "I never realized how much my hormone health was affecting my daily life until I started with HormoneFit. From the initial consultation to the personalized treatment plan, the entire process felt supportive and empowering. Within weeks, my energy levels improved, my mood stabilized, and I finally started feeling like myself again. The team is compassionate, professional, and truly committed to helping women thrive.",
+		author: "Sarah M."
+	},
+	{
+		text: "For years, I bounced between different doctors and treatments with no lasting relief. HormoneFit was a game changer. The clinicians took the time to really understand my symptoms and designed a plan tailored to my body and lifestyle. The regular check-ins made me feel seen and supported. I've never experienced such a holistic and patient-centered approach to care before — I only wish I found them sooner.",
+		author: "Lisa R."
+	},
+	{
+		text: "I was initially skeptical about trying virtual hormone care, but HormoneFit completely changed my mind. Booking appointments was easy, and every provider I spoke with was not only knowledgeable but incredibly kind. They walked me through every step, explained my lab results in plain language, and adjusted my plan as needed. It's rare to find a healthcare experience that feels this personal. I'm so grateful for the support and results I've seen.",
+		author: "Jennifer K."
+	},
+	{
+		text: "After being dismissed by so many providers in the past, HormoneFit was a breath of fresh air. They actually took my symptoms seriously and provided real solutions. I've seen improvements in my sleep, mood, and cycle regularity — and I finally feel in control of my health again.",
+		author: "Maria P."
+	},
+	{
+		text: "I was struggling with perimenopause symptoms and didn't know where to turn. HormoneFit made it easy to access expert care from the comfort of home. Their ongoing support and thoughtful treatment approach have made a huge difference in my quality of life.",
+		author: "Rachel B."
+	},
+	{
+		text: "I love how easy and accessible everything is with HormoneFit. No waiting rooms, no judgment — just real help when I needed it most. The team is incredibly knowledgeable and kind. I finally feel heard and supported on my health journey.",
+		author: "Emma S."
+	},
+	//Add more reviews here if needed
+];
 
 export default function Home() {
 	const [isYearly, setIsYearly] = useState(false);
+	const [showAllReviews, setShowAllReviews] = useState(false);
+	const reviewsToShow = showAllReviews ? reviews.length : 3;
 
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
@@ -84,8 +115,8 @@ export default function Home() {
 				</div>
 				{/* Boxes Section End */}
 
-					<div className="w-full px-10 md:px-40 py-20">
-						<div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 mb-14">
+					<div className="w-full px-10 md:px-40 py-30">
+						<div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 mb-25">
 							<div className="max-w-md text-center md:text-left">
 							<p className="text-lg">
 								From brain fog to sleep issues, menopause
@@ -134,13 +165,21 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="pt-16 w-full">
-					<h3 className="ml-40 mb-16 font-bold text-4xl">How Hormone Fit Works</h3>
+				<div className="pt-10 w-full">
+					<h2 className="text-4xl md:text-5xl font-bold text-center md:text-center leading-tight mb-25">
+						How HormoneFit<br />
+						<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
+							Works
+						</span>
+					</h2>
+					
 					<div className="max-w-6xl mx-auto flex flex-col gap-20">
 						{/* Step 1 */}
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-65 items-center">
 							<div>
-								<p className="text-gray-500 mb-2">Step 1</p>
+								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
+									Step 1
+								</span>
 								<h4 className="text-2xl font-semibold mb-2">Take the Quiz</h4>
 								<p className="text-gray-600">Complete our comprehensive assessment to help us understand your unique symptoms and health history</p>
 							</div>
@@ -153,7 +192,7 @@ export default function Home() {
 							</div>
 						</div>
 						{/* Step 2 */}
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-65 items-center">
 							<div className="order-2 md:order-1 flex justify-center">
 								<img
 									src="/mock.png"
@@ -162,15 +201,19 @@ export default function Home() {
 								/>
 							</div>
 							<div className="order-1 md:order-2">
-								<p className="text-gray-500 mb-2">Step 2</p>
+								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
+									Step 2
+								</span>
 								<h4 className="text-2xl font-semibold mb-2">Connect with Specialists</h4>
 								<p className="text-gray-600">Meet with Canadian menopause specialists via secure video call to discuss your personalized care plan</p>
 							</div>
 						</div>
 						{/* Step 3 */}
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-65 items-center">
 							<div>
-								<p className="text-gray-500 mb-2">Step 3</p>
+								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
+									Step 3
+								</span>
 								<h4 className="text-2xl font-semibold mb-2">Ongoing Care</h4>
 								<p className="text-gray-600">Receive your personalized treatment plan </p>
 							</div>
@@ -185,142 +228,76 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="px-10">
-					<h3 className="mb-10 font-bold text-4xl">
-						By Canadians For Canadians
-					</h3>
-					<div className="flex flex-row gap-8 mb-20">
-						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
-							<div className="bg-black text-white p-6 rounded-xl h-[60%]">
-								<div className="flex text-[#FFD6D6] mb-2">
+				<div className="px-8 md:px-24 py-40 text-center mb-30">
+					<h2 className="text-4xl md:text-5xl font-bold text-center md:text-center leading-tight mb-30">
+						By Canadians For Canadians<br />
+					</h2>
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10 w-full max-w-5xl mx-auto">
+						{reviews.slice(0, showAllReviews ? 6 : 3).map((review, idx) => (
+							<div
+								key={idx}
+								className="bg-white text-black p-6 rounded-xl shadow border border-gray-200 flex flex-col justify-between min-h-[400px]"
+							>
+								<div className="mb-6 text-left text-base flex-grow">{review.text}</div>
+								<div className="flex items-center justify-between mt-auto pt-2">
+									<span className="font-semibold text-sm text-gray-700">{review.author}</span>
 									<span className="flex flex-row gap-1">
 										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
+											<img key={i} src="/star-1.svg" alt="star" style={{ width: 20, height: 20 }} />
 										))}
 									</span>
 								</div>
-								<p className="mb-4">
-									Amazing service and support throughout my
-									journey. The doctors really listen and care.
-								</p>
-								<p className="font-semibold">- Sarah M.</p>
 							</div>
-							<div className="bg-black text-white p-6 rounded-xl h-[40%]">
-								<div className="flex text-[#FFD6D6] mb-2">
-									<span className="flex flex-row gap-1">
-										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
-										))}
-									</span>
-								</div>
-								<p className="mb-4">
-									Finally found relief from my symptoms. Thank
-									you HormoneFit!
-								</p>
-								<p className="font-semibold">- Lisa R.</p>
+						))}
+					</div>
+					<div className="flex justify-center">
+						<button
+								className="mt-5 inline-block bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
+								onClick={() => setShowAllReviews((prev) => !prev)}
+						>
+							{showAllReviews ? "Show Less" : "Show More Reviews"}
+						</button>
+
+
+
+						
+					</div>
+				</div>
+
+				<div className="w-full flex justify-center items-center py-30 bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0]">
+					<div className="flex flex-col md:flex-row items-center gap-10 bg-white rounded-3xl shadow-2xl px-10 py-20 max-w-6xl min-h-[400px] w-full">
+						{/* Doctor Avatar */}
+						<div className="flex-shrink-0 flex flex-col items-center md:items-start">
+							<div className="w-60 h-40 rounded-2xl border-4 border-accent1 shadow-lg overflow-hidden mb-4 bg-gradient-to-br from-accent1/30 to-accent2/30 flex items-center justify-center">
+								{/* Replace with real doctor image if available */}
+								<img src="/mock.png" alt="Dr. Nathan Roth" className="w-full h-full object-cover" />
 							</div>
+							<div className="flex items-center gap-2 mt-2">
+								<span className="font-bold text-lg text-accent1">Dr. Nathan Roth, MD LLM FRCSC</span>
+							</div>
+							<span className="text-gray-500 text-sm">Obstetrician, Gynecologist, Surgeon</span>
 						</div>
-						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
-							<div className="bg-black text-white p-6 rounded-xl h-[40%]">
-								<div className="flex text-[#FFD6D6] mb-2">
-									<span className="flex flex-row gap-1">
-										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
-										))}
-									</span>
-								</div>
-								<p className="mb-4">
-									The virtual consultations are so convenient.
-									Professional and caring team.
+						{/* Testimonial Content */}
+						<div className="flex-1 flex flex-col justify-center items-start">
+							<h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Real Experts. Real Care.</h3>
+							<div className="mb-6">
+								<p className="text-lg text-gray-700 leading-relaxed mb-10">
+									Dr. Nathan Roth is a leading expert in women's health with over 30 years of experience in obstetrics, gynecology, and infertility. He is the current Chair of the American Congress of Obstetrics and Gynecology (ACOG) Section and Medical Director at Hope Fertility.
 								</p>
-								<p className="font-semibold">- Jennifer K.</p>
-							</div>
-							<div className="bg-black text-white p-6 rounded-xl h-[60%]">
-								<div className="flex text-[#FFD6D6] mb-2">
-									<span className="flex flex-row gap-1">
-										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
-										))}
-									</span>
-								</div>
-								<p className="mb-4">
-									Comprehensive care that actually addresses
-									root causes. Highly recommend!
+								<p className="text-lg text-gray-700 leading-relaxed">
+									Dr. Roth has served as a medical advisor, chaired national health committees, and held leadership roles at The Scarborough Hospital Network. He now leads cervical cancer screening for Cancer Care Ontario, advancing health equity both locally and internationally.
 								</p>
-								<p className="font-semibold">- Maria P.</p>
-							</div>
-						</div>
-						<div className="flex flex-col gap-6 w-1/3 h-[500px]">
-							<div className="bg-black text-white p-6 rounded-xl h-[50%]">
-								<div className="flex text-[#FFD6D6] mb-2">
-									<span className="flex flex-row gap-1">
-										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
-										))}
-									</span>
-								</div>
-								<p className="mb-4">
-									Life-changing results. The personalized
-									approach makes all the difference.
-								</p>
-								<p className="font-semibold">- Rachel B.</p>
-							</div>
-							<div className="bg-black text-white p-6 rounded-xl h-[50%]">
-								<div className="flex text-[#FFD6D6] mb-2">
-									<span className="flex flex-row gap-1">
-										{Array.from({ length: 5 }).map((_, i) => (
-											<img key={i} src="/star-1.svg" alt="star" style={{ width: 22, height: 22 }} />
-										))}
-									</span>
-								</div>
-								<p className="mb-4">
-									Expert guidance and support every step of
-									the way.
-								</p>
-								<p className="font-semibold">- Emma S.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="pt-16 px-8 bg-primary">
-					<div className="flex flex-row gap-8 mb-20">
-						<div className="w-1/2">
-							<div className=" rounded-2xl p-8 h-full">
-								<h3 className="mb-10 font-bold text-4xl">
-									Real Experts. Real Care.
-								</h3>
-								<p className="text-gray-700 mb-6">
-									"Lorem ipsum dolor sit amet consectetur
-									adipiscing elit. Consectetur adipiscing
-									elit, cursus nec lectus ex enim vitae. Ex
-									sapien vitae pellentesque sem placerat in
-									id. Placerat in id cursus mi pretium tellus
-									duis. Pretium tellus duis convallis tempus
-									leo eu aenean."
-								</p>
-								<p className="font-semibold">
-									Dr. Nathan Roth, MD LLM FRCSC
-								</p>
-								<p className="text-gray-600">
-									Obstetrician, Gynecologist, Surgeon
-								</p>
-							</div>
-						</div>
-						<div className="w-1/2">
-							<div className="bg-ominous rounded-2xl p-8 h-full">
-								{/* Image placeholder */}
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="pt-16">
+				<div className="pt-25">
 					<h3 className="mb-10 font-bold text-4xl text-center">
 						Pricing
 					</h3>
 					<div className="flex flex-row gap-8 justify-center mb-20">
-						<div className="w-[500px] border-2 border-[#FFD6D6] rounded-2xl p-8">
+						<div className="w-[500px] border-2 border-[#E0E0E0] rounded-2xl p-8">
 							<div className="text-center mb-6">
 								<h4 className="text-2xl font-semibold mb-2">
 									Complete Care
@@ -399,140 +376,124 @@ export default function Home() {
 									</li>
 								</ul>
 							</div>
-
-							<button className="w-full bg-accent1 text-white py-4 rounded-xl font-bold transition-all duration-200 hover:bg-opacity-90 hover:transform hover:scale-[1.02] active:scale-[0.98] active:bg-opacity-100">
+							<button className="w-full bg-gradient-to-r from-accent1 to-accent2 text-white  py-4 rounded-xl font-bold transition-all duration-200 hover:bg-opacity-90 hover:transform hover:scale-[1.02] active:scale-[0.98] active:bg-opacity-100">
 								Get Started
 							</button>
 						</div>
 					</div>
 				</div>
 
-				<div className="flex justify-center mb-20">
-					<div className="bg-[#F3E5F5] p-8 rounded-2xl w-[500px] text-center">
-						<h3 className="text-2xl font-semibold mb-6">
-							Ready to take control of your health?
-						</h3>
-						<ul className="text-left mb-6 space-y-2">
-							<li className="flex items-center">
-								<span className="mr-2">✓</span>
-								Free online consultation
-							</li>
-							<li className="flex items-center">
-								<span className="mr-2">✓</span>Personalized
-								treatment plans
-							</li>
-							<li className="flex items-center">
-								<span className="mr-2">✓</span>
-								Ongoing support and monitoring
-							</li>
-							<li className="flex items-center">
-								<span className="mr-2">✓</span>
-								Expert medical team
-							</li>
-						</ul>
-						<button className="bg-accent1 text-white px-8 py-3 rounded-lg font-semibold">
-							Get Started
-						</button>
+				{/* FAQ Section - Menopause themed, styled to match */}
+				<div className="w-full flex flex-col md:flex-row justify-center items-start gap-20 px-8 md:px-24 py-20">
+					{/* Left: Heading/Intro */}
+					<div className="md:w-1/3 w-full mb-10 md:mb-0">
+						<h2 className="text-4xl md:text-6xl font-bold mb-6 text-left bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Frequently Asked Questions</h2>
+						<p className="text-lg text-gray-700 mb-2 text-left">Everything you want to know about menopause care, HormoneFit, and how we support your journey.</p>
+						<a href="#contact" className="inline-block mt-4 bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition">Contact Us</a>
+					</div>
+					{/* Right: Accordion */}
+					<div className="md:w-2/3 w-full">
+						<FAQAccordion />
 					</div>
 				</div>
-
-				<div className="w-full px-16 py-20 bg-[#FFD6D6] mb-20">
-					<h3 className="text-4xl font-bold mb-12 text-center">
-						The Impact of Menopause
-					</h3>
-					<div className="grid grid-cols-4 gap-12">
-						<div className="text-center">
-							<div className="text-5xl font-bold mb-4">75%</div>
-							<p className="text-lg">
-								of women experience hot flashes during menopause
-							</p>
-						</div>
-						<div className="text-center">
-							<div className="text-5xl font-bold mb-4">10M+</div>
-							<p className="text-lg">
-								Canadian women are in menopause or perimenopause
-							</p>
-						</div>
-						<div className="text-center">
-							<div className="text-5xl font-bold mb-4">60%</div>
-							<p className="text-lg">
-								report sleep disturbances affecting daily life
-							</p>
-						</div>
-						<div className="text-center">
-							<div className="text-5xl font-bold mb-4">80%</div>
-							<p className="text-lg">
-								don't receive the care they need for symptoms
-							</p>
-						</div>
-					</div>
-				</div>
+				
 			</main>
-			<footer className="bg-[#FFE8E8] py-12 w-full ">
-				<div className="max-w-6xl mx-auto grid grid-cols-4 gap-8">
-					<div className="col-span-1">
-						<div className="w-32 h-32 bg-[#F3E5F5] rounded-xl mb-4"></div>
-						<p className="text-sm text-gray-600">
-							Empowering women through personalized menopause care
-						</p>
+
+
+			<footer className="w-full flex justify-center items-center">
+				<div className="w-full rounded-none bg-white px-50 py-12 flex flex-col items-center">
+					<div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-20 mb-10">
+						{/* Logo */} 
+						<div className="flex-1 flex flex-col items-center md:items-start mb-20 md:mb-0">
+							<div className="w-30 h-30 bg-[#F3E5F5] rounded-xl flex items-center justify-center mb-4">
+								{/* Replace with your logo if available */}
+							</div>
+							<p className="text-sm text-gray-600 text-center md:text-left">
+								Empowering women through personalized menopause care
+							</p>
+						</div>
+						{/* Company */}
+						<div className="flex-1">
+							<h4 className="font-semibold mb-4">Company</h4>
+							<ul className="space-y-2">
+								<li><a href="#" className="text-gray-600">Our Doctors</a></li>
+								<li><a href="#" className="text-gray-600">Reviews</a></li>
+							</ul>
+						</div>
+						{/* Support */}
+						<div className="flex-1">
+							<h4 className="font-semibold mb-4">Support</h4>
+							<ul className="space-y-2">
+								<li><a href="#" className="text-gray-600">FAQ</a></li>
+								<li><a href="#" className="text-gray-600">Contact Us</a></li>
+							</ul>
+						</div>
+						{/* Social */}
+						<div className="flex-1">
+							<h4 className="font-semibold mb-4">Social</h4>
+							<div className="flex flex-row gap-4">
+								<a href="#" className="text-gray-600"><i className="fab fa-instagram" /></a>
+								<a href="#" className="text-gray-600"><i className="fab fa-facebook" /></a>
+								<a href="#" className="text-gray-600"><i className="fab fa-twitter" /></a>
+								<a href="#" className="text-gray-600"><i className="fab fa-linkedin" /></a>
+							</div>
+						</div>
 					</div>
-					<div className="col-span-1">
-						<h4 className="font-semibold mb-4">Company</h4>
-						<ul className="space-y-2">
-							<li>
-								<a href="#" className="text-gray-600">
-									Our Doctors
-								</a>
-							</li>
-							<li>
-								<a href="#" className="text-gray-600">
-									Reviews
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div className="col-span-1">
-						<h4 className="font-semibold mb-4">Support</h4>
-						<ul className="space-y-2">
-							<li>
-								<a href="#" className="text-gray-600">
-									FAQ
-								</a>
-							</li>
-							<li>
-								<a href="#" className="text-gray-600">
-									Contact Us
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div className="col-span-1">
-						<h4 className="font-semibold mb-4">Social</h4>
-						<ul className="space-y-2">
-							<li>
-								<a href="#" className="text-gray-600">
-									Instagram
-								</a>
-							</li>
-							<li>
-								<a href="#" className="text-gray-600">
-									Facebook
-								</a>
-							</li>
-							<li>
-								<a href="#" className="text-gray-600">
-									Twitter
-								</a>
-							</li>
-							<li>
-								<a href="#" className="text-gray-600">
-									LinkedIn
-								</a>
-							</li>
-						</ul>
-					</div>
+					<hr className="w-full border-t border-gray-100 my-3" />
+					<div className="w-full text-center text-sm text-gray-500">© {new Date().getFullYear()} HormoneFit | All Rights Reserved</div>
 				</div>
 			</footer>
+		</div>
+	);
+}
+
+function FAQAccordion() {
+	const [open, setOpen] = React.useState<number | null>(null);
+	const faqs = [
+		{
+			q: "What symptoms can HormoneFit help with?",
+			a: "HormoneFit supports a wide range of menopause symptoms, including hot flashes, sleep issues, mood changes, brain fog, weight changes, and more. Your care plan is tailored to your unique needs."
+		},
+		{
+			q: "Do I need a referral to join?",
+			a: "No referral is needed. You can get started by taking our online quiz and booking your first consultation directly."
+		},
+		{
+			q: "Is HormoneFit available across Canada?",
+			a: "Yes! Our virtual care platform is available to women in most provinces and territories across Canada."
+		},
+		{
+			q: "How are treatments personalized?",
+			a: "Our clinicians review your symptoms, health history, and goals to create a plan just for you. We adjust your treatment as your needs change."
+		},
+		{
+			q: "Can I talk to a real doctor?",
+			a: "Absolutely. All consultations are with licensed Canadian healthcare professionals who specialize in menopause care."
+		},
+		{
+			q: "What if my symptoms change?",
+			a: "You can message your care team anytime and book follow-ups as needed. We're here to support you as your needs evolve."
+		}
+	];
+	return (
+		<div className="flex flex-col">
+			{faqs.map((item, idx) => (
+				<div key={idx} className="border-b border-gray-200">
+					<button
+						className={`w-full text-left px-0 py-6 flex justify-between items-center focus:outline-none transition-colors ${open === idx ? 'font-bold text-accent1 text-xl' : 'font-semibold text-lg text-black'}`}
+						onClick={() => setOpen(open === idx ? null : idx)}
+						aria-expanded={open === idx}
+					>
+						<span className="text-left">{item.q}</span>
+						<span className={`ml-4 transition-transform duration-200 text-2xl text-gray-400 ${open === idx ? 'rotate-180 text-accent1' : ''}`}>⌄</span>
+					</button>
+					{open === idx && (
+						<div className="pl-0 pr-8 pb-6 text-gray-700 text-base animate-fade-in">
+							{item.a}
+						</div>
+					)}
+				</div>
+			))}
 		</div>
 	);
 }
