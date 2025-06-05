@@ -1,12 +1,8 @@
 import mongoose from "mongoose";
+import { unique } from "next/dist/build/utils.js";
 
 const doctorSchema = new mongoose.Schema({
-    _id: {
-        type: String, required: true
-    },
-    medical_license_number: {
-        type: String, required: true, unique: true
-    },
+
     first_name: {
         type: String, required: true
     },
@@ -25,6 +21,12 @@ const doctorSchema = new mongoose.Schema({
     professional_photo: {
         type: String
     },
+    date_of_birth: {
+        type: Date, required: true
+    },
+    specialty: {
+        type: String, required: true
+    },
     address: {
         type: String
     },
@@ -40,17 +42,15 @@ const doctorSchema = new mongoose.Schema({
         year_graduated: { type: Number, required: true },
         certification: { type: String }
     }],
+    doctor_fee: {
+        type: Number
+    },
     years_of_experience: {
         type: Number
     },
-    office_hours: {
-        monday: { start: String, end: String },
-        tuesday: { start: String, end: String },
-        wednesday: { start: String, end: String },
-        thursday: { start: String, end: String },
-        friday: { start: String, end: String },
-        saturday: { start: String, end: String },
-        sunday: { start: String, end: String }
+    
+    available: {
+        type: Boolean, default: true
     },
     consultation_fee: {
         type: Number
@@ -63,8 +63,16 @@ const doctorSchema = new mongoose.Schema({
     }],
     is_verified: {
         type: Boolean, default: false
-    }
-}, { timestamps: true });
+    },
+    slots_booked: {
+        type:Object, default:{}
+    },
+    reviews: [{
+        user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        rating: {type: Number, required: true},
+
+    }],
+} , { timestamps: true }, {minimize: false});
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 export default Doctor; 
