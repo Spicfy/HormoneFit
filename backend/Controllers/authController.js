@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 
 
 export const register = async (req, res) =>{
-    const {first_name, last_name, email, password, date_of_birth, gender} = req.body;
-    if(!first_name || !last_name || !email || !password || !date_of_birth || !gender){
+    const {first_name, last_name, email, password, date_of_birth, sex, postalCode,  healthCardNumber} = req.body;
+    if(!first_name || !last_name || !email || !password || !date_of_birth || !sex || !postalCode || !healthCardNumber){
 
         return res.status(400).json({message: "All fields are required", success: false});
     }
@@ -30,7 +30,9 @@ export const register = async (req, res) =>{
         email,
         password: hashedPassword,
         date_of_birth,
-        gender
+        sex,
+        postalCode,
+        healthCardNumber
     });
     const savedUser = await user.save();
 
@@ -50,7 +52,7 @@ secure: ensures cookie is sent only over HTTPS in production
     return res.json({success:true});
     }catch(error){
         console.error("Error during registration:", error);
-        return res.status(500).json({message: "Internal server error idiot", success: false});
+        return res.status(500).json({message: "Internal server error idiot" + error.message, success: false});
     }
 };
 
@@ -92,5 +94,3 @@ export const logout = async (req, res)=> {
         return res.json({success: false, message: error.message });
     }
 }
-
-

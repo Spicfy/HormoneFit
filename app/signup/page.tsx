@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Header from "@/components/header";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Signup() {
 	const [formData, setFormData] = useState({
@@ -19,13 +20,46 @@ export default function Signup() {
 	});
 	const [samePass, setSamePass] = useState(false);
 	const [errorReason, setErrorReason] = useState(false);
+	const [successMessage, setSuccessMessage] = useState("");	
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (formData.password != formData.confirmPassword) {
+		if (formData.password == formData.confirmPassword) {
 			setSamePass(true);
 		} else {
 			setSamePass(false);
+		}
+		if (!formData.acceptTerms) {
+			setErrorReason(true);
+			return;
+		}
+
+		try{
+			const response = await axios.post("http://localhost:4000/api/auth/register", {
+				first_name: formData.firstName,
+				last_name: formData.lastName,
+				email: formData.email,
+				password: formData.password,
+				date_of_birth: formData.dateOfBirth,
+				sex: formData.sex,
+				postalCode: formData.postalCode,
+				healthCardNumber: formData.healthCardNumber,
+			},
+			{
+				withCredentials: true,
+			}
+			
+	);
+
+	if(response.data.success){
+		setSuccessMessage("Account created successfully!");
+	}else{
+		setErrorReason(true);
+		console.error("Registration failed:", response.data.message);
+	}
+		} catch(error){
+			console.error("Error during registration:", error);
+			setErrorReason(true);
 		}
 	};
 

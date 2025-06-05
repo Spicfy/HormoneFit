@@ -1,11 +1,8 @@
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils";
+import { unique } from "next/dist/build/utils.js";
 
 const doctorSchema = new mongoose.Schema({
-    _id: {
-        type: String, required: true,
-        unique
-    },
+
     first_name: {
         type: String, required: true
     },
@@ -66,8 +63,16 @@ const doctorSchema = new mongoose.Schema({
     }],
     is_verified: {
         type: Boolean, default: false
-    }
-}, { timestamps: true });
+    },
+    slots_booked: {
+        type:Object, default:{}
+    },
+    reviews: [{
+        user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        rating: {type: Number, required: true},
+
+    }],
+} , { timestamps: true }, {minimize: false});
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 export default Doctor; 
