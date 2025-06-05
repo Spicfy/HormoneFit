@@ -1,9 +1,9 @@
 "use client";
 
-import Header from "@/components/header";
 import Image from "next/image";
 import { useState } from "react";
 import React from "react";
+import Link from 'next/link';
 
 const reviews = [
 	{
@@ -40,7 +40,6 @@ export default function Home() {
 
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
-			<Header />
 			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
 				{/* Modern Hero Section Start */}
 				<section className="w-full bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
@@ -81,25 +80,7 @@ export default function Home() {
 				</section>
 				{/* Modern Hero Section End */}
 
-				{/* Modern Info Bar Start */}
-				<div className="w-full flex justify-center -mt-10">
-					<div className="backdrop-blur-md bg-white/80 border border-[#E0E0E0] rounded-3xl shadow-xl px-12 py-3 flex flex-col md:flex-row items-center justify-around gap-6 w-11/12 md:w-4/5">
-						<div className="flex flex-row items-center gap-x-3">
-							<img src="/heart.svg" alt="" className="w-8 h-8" />
-							<p className="font-medium">Trusted by 1,000,000 patients</p>
-						</div>
-						<div className="flex flex-row items-center gap-x-3">
-							<img src="/stethoscope.svg" alt="" className="w-10 h-10" />
-							<p className="font-medium">Licensed healthcare professionals</p>
-						</div>
-						<div className="flex flex-row items-center gap-x-3">
-							<img src="/maple-leaf.svg" alt="" className="w-10 h-10" />
-							<p className="font-medium">Canadian Owned</p>
-						</div>
-					</div>
-				</div>
-				{/* Modern Info Bar End */}
-
+				
 				{/* Boxes Section Start */}
 				<div className="flex justify-center mt-32 w-full px-4">
 				<div className="w-11/12 md:w-4/5 flex flex-row justify-between h-[80vh] gap-8">
@@ -396,53 +377,7 @@ export default function Home() {
 						<FAQAccordion />
 					</div>
 				</div>
-				
 			</main>
-
-
-			<footer className="w-full flex justify-center items-center">
-				<div className="w-full rounded-none bg-white px-50 py-12 flex flex-col items-center">
-					<div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-20 mb-10">
-						{/* Logo */} 
-						<div className="flex-1 flex flex-col items-center md:items-start mb-20 md:mb-0">
-							<div className="w-30 h-30 bg-[#F3E5F5] rounded-xl flex items-center justify-center mb-4">
-								{/* Replace with your logo if available */}
-							</div>
-							<p className="text-sm text-gray-600 text-center md:text-left">
-								Empowering women through personalized menopause care
-							</p>
-						</div>
-						{/* Company */}
-						<div className="flex-1">
-							<h4 className="font-semibold mb-4">Company</h4>
-							<ul className="space-y-2">
-								<li><a href="#" className="text-gray-600">Our Doctors</a></li>
-								<li><a href="#" className="text-gray-600">Reviews</a></li>
-							</ul>
-						</div>
-						{/* Support */}
-						<div className="flex-1">
-							<h4 className="font-semibold mb-4">Support</h4>
-							<ul className="space-y-2">
-								<li><a href="#" className="text-gray-600">FAQ</a></li>
-								<li><a href="#" className="text-gray-600">Contact Us</a></li>
-							</ul>
-						</div>
-						{/* Social */}
-						<div className="flex-1">
-							<h4 className="font-semibold mb-4">Social</h4>
-							<div className="flex flex-row gap-4">
-								<a href="#" className="text-gray-600"><i className="fab fa-instagram" /></a>
-								<a href="#" className="text-gray-600"><i className="fab fa-facebook" /></a>
-								<a href="#" className="text-gray-600"><i className="fab fa-twitter" /></a>
-								<a href="#" className="text-gray-600"><i className="fab fa-linkedin" /></a>
-							</div>
-						</div>
-					</div>
-					<hr className="w-full border-t border-gray-100 my-3" />
-					<div className="w-full text-center text-sm text-gray-500">© {new Date().getFullYear()} HormoneFit | All Rights Reserved</div>
-				</div>
-			</footer>
 		</div>
 	);
 }
