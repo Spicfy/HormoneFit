@@ -15,7 +15,7 @@ app.use(cors())
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 //API endpoints for testing
 app.get('/', (req, res) => {
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.send('Hello, World');
 })
 app.use('/api/auth', authRoutes)
-
+app.use('/api/user', userRoutes);
 
 
 app.listen(PORT, ()=> {

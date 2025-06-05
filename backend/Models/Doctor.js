@@ -79,10 +79,7 @@ const doctorSchema = new mongoose.Schema({
     calendly_access_token:{
         type: String,
     },
-    calendly_webhook_url:{
-        type: String,
-        // This will be the URL where Calendly sends webhook events
-    }
+
 } , { timestamps: true }, {minimize: false});
 
 const Doctor = mongoose.model('Doctor', doctorSchema);

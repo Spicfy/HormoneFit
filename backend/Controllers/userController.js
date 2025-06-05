@@ -65,4 +65,17 @@ export const bookAppointment = async (req, res) => {
         }catch(error){
         res.json({success: false, message: error.message});
     }
+}
+
+export const listAppointments = async (req, res) => {
+    try{    
+        const {userId} = req.body;
+
+        const appointments = await Appointment.find({user_id: userId})
+
+        res.json({success:true, appointments})
+
+    }catch(error){
+        res.json({success: false, message: error.message});
     }
+}

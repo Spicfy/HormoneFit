@@ -17,8 +17,9 @@ const UserSchema = new mongoose.Schema({
     profile_picture: {
         type: String
     },
-    address: {
-        type: String
+    postalCode: {
+        type: String,
+		required: true
     },
     phone: {
         type: String
@@ -27,11 +28,15 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    gender: {
+    sex: {
         type: String, enum: ['male', 'female', 'other'],
         required: true
 
     },
+	healthCardNumber: {
+		type: String,
+		required: true
+	}
 
 
 }, { timestamps: true });

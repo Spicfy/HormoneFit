@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 
 
 export const register = async (req, res) =>{
-    const {first_name, last_name, email, password, date_of_birth, gender} = req.body;
-    if(!first_name || !last_name || !email || !password || !date_of_birth || !gender){
+    const {first_name, last_name, email, password, date_of_birth, sex, postalCode,  healthCardNumber} = req.body;
+    if(!first_name || !last_name || !email || !password || !date_of_birth || !sex){
 
         return res.status(400).json({message: "All fields are required", success: false});
     }
