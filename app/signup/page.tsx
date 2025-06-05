@@ -36,23 +36,18 @@ export default function Signup() {
 
 		try{
 			const response = await axios.post("http://localhost:4000/api/auth/register", {
-				firstName: formData.firstName,
-				lastName: formData.lastName,
+				first_name: formData.firstName,
+				last_name: formData.lastName,
 				email: formData.email,
 				password: formData.password,
-				dateOfBirth: formData.dateOfBirth,
+				date_of_birth: formData.dateOfBirth,
 				sex: formData.sex,
 				postalCode: formData.postalCode,
 				healthCardNumber: formData.healthCardNumber,
 			},
-		{
-			withCredentials: true,
-			headers: {
-				"Content-Type": "application/json"
-			}
-		}
-		
+			
 	);
+
 	if(response.data.success){
 		setSuccessMessage("Account created successfully!");
 	}else{

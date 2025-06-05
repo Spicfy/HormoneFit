@@ -72,14 +72,6 @@ const doctorSchema = new mongoose.Schema({
         rating: {type: Number, required: true},
 
     }],
-    calendly_user_uri: {
-        type: String,
-        // This will be the Calendly user URI (e.g., "https://api.calendly.com/users/XXXXXX")
-    },
-    calendly_access_token:{
-        type: String,
-    },
-
 } , { timestamps: true }, {minimize: false});
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
