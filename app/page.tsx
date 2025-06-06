@@ -41,8 +41,6 @@ export default function Home() {
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
 			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
-
-			
 				{/* Modern Hero Section Start */}
 				<section className="w-full bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
 					
