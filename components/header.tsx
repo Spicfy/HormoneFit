@@ -33,9 +33,7 @@ export default function Header() {
 		>
 			<h1 className="bold">Hormone Fit</h1>
 			<div className="flex flex-row items-center space-x-5 ">
-				<h5>Treatments</h5>
-				<h5>About Us</h5>
-				<h5>Shop</h5>
+				<h5>Login</h5>
 				<a
 					className="bg-accent1 px-3 rounded-xl py-2 text-whitetxt shadow-md hover:scale-105 transition"
 					href=""

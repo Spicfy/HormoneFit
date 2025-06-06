@@ -45,6 +45,9 @@ export default function Signup() {
 				postalCode: formData.postalCode,
 				healthCardNumber: formData.healthCardNumber,
 			},
+			{
+				withCredentials: true,
+			}
 			
 	);
 

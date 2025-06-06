@@ -36,7 +36,9 @@ const UserSchema = new mongoose.Schema({
 	healthCardNumber: {
 		type: String,
 		required: true
-	}
+	},
+    resetPasswordToken: String,
+    resetPasswordExpiresAt: Date
 
 
 }, { timestamps: true });

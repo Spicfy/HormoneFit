@@ -6,5 +6,3 @@ const router = express.Router();
 router.post('/book-appointment',protect, bookAppointment)
 
 export default router;
-
-
