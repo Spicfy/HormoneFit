@@ -2,11 +2,11 @@ import User from "../Models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-
+import nodemailer from "nodemailer";
 
 export const register = async (req, res) =>{
-    const {first_name, last_name, email, password, date_of_birth, gender} = req.body;
-    if(!first_name || !last_name || !email || !password || !date_of_birth || !gender){
+    const {first_name, last_name, email, password, date_of_birth, sex, postalCode,  healthCardNumber} = req.body;
+    if(!first_name || !last_name || !email || !password || !date_of_birth || !sex || !postalCode || !healthCardNumber){
 
         return res.status(400).json({message: "All fields are required", success: false});
     }
@@ -30,7 +30,9 @@ export const register = async (req, res) =>{
         email,
         password: hashedPassword,
         date_of_birth,
-        gender
+        sex,
+        postalCode,
+        healthCardNumber
     });
     const savedUser = await user.save();
 
@@ -50,7 +52,7 @@ secure: ensures cookie is sent only over HTTPS in production
     return res.json({success:true});
     }catch(error){
         console.error("Error during registration:", error);
-        return res.status(500).json({message: "Internal server error idiot", success: false});
+        return res.status(500).json({message: "Internal server error idiot" + error.message, success: false});
     }
 };
 
@@ -80,17 +82,35 @@ export const login = async (req, res) => {
 }
 export const logout = async (req, res)=> {
     try{
-        res.clearCookie('token', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        sameSite: process.env.NODE_ENV === 'production'? 'none': 'strict',
-        });
-        return res.json({success: true, message: "Logged out successfully"});
+        res.clearCookie("token")
+        return res.status(200).json({success: true, message: "Logged out successfully"});
 
 
     }catch(error){
         return res.json({success: false, message: error.message });
     }
 }
+export const forgotPassword = async(req, res) => {
+    const {email} = req.body;
+    try{
+        const user = await User.findOne({email});
+        if(!user){
+            return res.json({success: false, message: "User not found"});
+        }
+        // generate reset token
+        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '15m'});
+        
+        // Send token to user's email
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth:{
+                user: process.env.EMAIL,
+                pass:process.env.PASSWORD_APP_EMAIL
+            }
+        })
 
-
+;
+    }catch(error){
+        return res.status(500).json({success: false, message: "Internal server error: " + error.message});
+    }
+}
