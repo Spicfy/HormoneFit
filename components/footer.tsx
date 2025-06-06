@@ -14,8 +14,9 @@ const Footer = () => (
         <div className="flex-1">
           <h4 className="font-semibold text-gray-600 mb-4">Company</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-600">Our Doctors</a></li>
-            <li><a href="#" className="text-gray-600">Reviews</a></li>
+            <li><a href="/about" className="text-gray-600">About Us</a></li>
+            <li><a href="/treatments" className="text-gray-600">Treatments</a></li>
+
           </ul>
         </div>
 

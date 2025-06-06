@@ -41,6 +41,8 @@ export default function Home() {
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
 			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
+
+			
 				{/* Modern Hero Section Start */}
 				<section className="w-full bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
 					
@@ -79,8 +81,26 @@ export default function Home() {
 					</div>
 				</section>
 				{/* Modern Hero Section End */}
+			
+				{/* Modern Info Bar Start */}
+				<div className="w-full flex justify-center -mt-10">
+					<div className="backdrop-blur-md bg-white/80 border border-[#E0E0E0] rounded-3xl shadow-xl px-12 py-3 flex flex-col md:flex-row items-center justify-around gap-6 w-11/12 md:w-4/5">
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/heart.svg" alt="" className="w-8 h-8" />
+							<p className="font-medium">Trusted by 1,000,000 patients</p>
+						</div>
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/stethoscope.svg" alt="" className="w-10 h-10" />
+							<p className="font-medium">Licensed healthcare professionals</p>
+						</div>
+						<div className="flex flex-row items-center gap-x-3">
+							<img src="/maple-leaf.svg" alt="" className="w-10 h-10" />
+							<p className="font-medium">Canadian Owned</p>
+						</div>
+					</div>
+				</div>
+				{/* Modern Info Bar End */}
 
-				
 				{/* Boxes Section Start */}
 				<div className="flex justify-center mt-32 w-full px-4">
 				<div className="w-11/12 md:w-4/5 flex flex-row justify-between h-[80vh] gap-8">
