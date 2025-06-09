@@ -6,6 +6,7 @@ const connectDB = async () => {
         await mongoose.connect(`${process.env.MONGODB_URI}/Lola`)
     }catch(error){
         console.log(error.message);
+        
     }
 }
 

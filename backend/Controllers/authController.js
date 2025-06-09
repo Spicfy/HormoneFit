@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
+import crypto from "crypto";
+import transporter from '../configs/nodemailer.js';
 
 export const register = async (req, res) =>{
     const {first_name, last_name, email, password, date_of_birth, sex, postalCode,  healthCardNumber} = req.body;
@@ -32,7 +34,9 @@ export const register = async (req, res) =>{
         date_of_birth,
         sex,
         postalCode,
-        healthCardNumber
+        healthCardNumber,
+        emailVerificationToken: crypto.randomBytes(32).toString('hex'),
+        emailVerificationTokenExpires: Date.now() + 3600000 // 1 hour
     });
     const savedUser = await user.save();
 
@@ -75,6 +79,16 @@ export const login = async (req, res) => {
             sameSite: process.env.NODE_ENV === 'production'? 'none': 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
+
+        //Send welcome email
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: 'Welcome to HormoneFit',
+            text: `Hello ${user.first_name} ${user.last_name}. Welcome to HormoneFit! We are excited to have you on board. Your account has been successfully created. You can now log in and start using our services.`,
+
+        }
+
         return res.json({success: true});
     }catch(error){
         return res.json({success: false, message: error.message})
@@ -90,6 +104,16 @@ export const logout = async (req, res)=> {
         return res.json({success: false, message: error.message });
     }
 }
+
+export const sendVerifyEmail = async(req, res) => {
+    const {email} = req.body;
+    try{
+
+    }catch(error){
+        return res.status(500).json({success: false, message: "Internal server error: " + error.message});
+    }
+}
+
 export const forgotPassword = async(req, res) => {
     const {email} = req.body;
     try{
@@ -98,7 +122,7 @@ export const forgotPassword = async(req, res) => {
             return res.json({success: false, message: "User not found"});
         }
         // generate reset token
-        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '15m'});
+        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '15m'});
         
         // Send token to user's email
         const transporter = nodemailer.createTransport({
