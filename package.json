@@ -12,6 +12,7 @@
     "axios": "^1.9.0",
     "express": "^5.1.0",
     "framer-motion": "^12.15.0",
+    "locomotive-scroll": "^4.1.4",
     "next": "15.3.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",

@@ -71,45 +71,47 @@ export default function FAQPage() {
   const [openQuestionIndex, setOpenQuestionIndex] = useState<string | null>(null);
 
   return (
-    <div className="w-full min-h-screen bg-white text-black px-4 md:px-24 py-16">
-      <h1 className="text-4xl md:text-5xl font-bold mb-12 text-left">Frequently Asked Questions</h1>
-      {FAQ_DATA.map((section) => (
-        <div key={section.section} className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-accent1">{section.section}</h2>
-          {section.faqs.map((faq, idx) => {
-            const uniqueId = `${section.section}-${idx}`;
-            const isOpen = openQuestionIndex === uniqueId;
-            return (
-              <div key={uniqueId} className="border-b border-gray-200 mb-4">
-                <button
-                  className={`w-full text-left py-4 flex justify-between items-center transition-colors ${
-                    isOpen
-                      ? "text-accent1 font-bold text-xl"
-                      : "text-black font-medium text-lg"
-                  }`}
-                  onClick={() =>
-                    setOpenQuestionIndex(isOpen ? null : uniqueId)
-                  }
-                >
-                  {faq.q}
-                  <span
-                    className={`ml-4 transition-transform duration-200 text-2xl text-gray-400 ${
-                      isOpen ? "rotate-180 text-accent1" : ""
+    <main className="bg-white min-h-screen font-sans pb-0">
+      <div className="w-full min-h-screen bg-white text-black px-4 md:px-24 py-16">
+        <h1 className="text-4xl md:text-6xl font-bold mb-12 text-left">Frequently Asked Questions</h1>
+        {FAQ_DATA.map((section) => (
+          <div key={section.section} className="mb-12">
+            <h2 className="text-2xl font-bold mb-6 text-accent1">{section.section}</h2>
+            {section.faqs.map((faq, idx) => {
+              const uniqueId = `${section.section}-${idx}`;
+              const isOpen = openQuestionIndex === uniqueId;
+              return (
+                <div key={uniqueId} className="border-b border-gray-200 mb-4">
+                  <button
+                    className={`w-full text-left py-4 flex justify-between items-center transition-colors ${
+                      isOpen
+                        ? "text-accent1 font-bold text-xl"
+                        : "text-black font-medium text-lg"
                     }`}
+                    onClick={() =>
+                      setOpenQuestionIndex(isOpen ? null : uniqueId)
+                    }
                   >
-                    ⌄
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="pb-4 text-gray-700 text-base px-2">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      ))}
-    </div>
+                    {faq.q}
+                    <span
+                      className={`ml-4 transition-transform duration-200 text-2xl text-gray-400 ${
+                        isOpen ? "rotate-180 text-accent1" : ""
+                      }`}
+                    >
+                      ⌄
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="pb-4 text-gray-700 text-base px-2">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </main>
   );
 }

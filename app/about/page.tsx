@@ -3,17 +3,17 @@
 
 export default function AboutPage() {
 	return (
-		<main className="bg-white min-h-screen font-sans">
+		<main className="bg-white min-h-screen font-sans pb-0">
 			{/* Mission Statement */}
-			<section className="bg-gradient-to-br from-pink-50 via-white to-purple-50 px-8 py-20">
+			<section className="bg-gradient-to-br from-pink-50 via-white to-purple-50 px-4 md:px-24 py-20">
 				<div className="max-w-4xl mx-auto">
-					<h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">We're on a mission to help women thrive through every stage of menopause.</h1>
-					<p className="text-xl text-gray-700 font-light mb-4 max-w-2xl">Living your best life starts with your health. At Hormone Fit, we believe every woman deserves personalized, stigma-free care—so you can feel your best, every day.</p>
+					<h1 className="text-4xl md:text-5xl text-center font-extrabold text-gray-900 mb-6 leading-tight">We're on a mission to help women thrive through every stage of menopause.</h1>
+					<p className="text-xl text-center text-gray-700 font-light mb-4 mx-auto">Living your best life starts with your health. At Hormone Fit, we believe every woman deserves personalized, stigma-free care—so you can feel your best, every day.</p>
 				</div>
 			</section>
 
 			{/* Problem & Solution */}
-			<section className="px-8 py-16 max-w-4xl mx-auto">
+			<section className="px-4 md:px-24 py-16 max-w-4xl mx-auto">
 				<div className="space-y-6">
                     <span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent text-2xl font-bold">
                         But that's easier said than done
@@ -27,7 +27,7 @@ export default function AboutPage() {
 			</section>
 
 			{/* What We Offer */}
-			<section className="px-8 py-16 bg-gradient-to-r from-white via-pink-50 to-white">
+			<section className="px-4 md:px-24 py-16 bg-gradient-to-r from-white via-pink-50 to-white">
 				<div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 					{[
 						{
@@ -56,7 +56,7 @@ export default function AboutPage() {
 			</section>
 
 			{/* Company Overview */}
-			<section className="px-8 py-16 max-w-4xl mx-auto">
+			<section className="px-4 md:px-24 py-16 max-w-4xl mx-auto">
 				<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent text-2xl font-bold">
 					A new approach to women's health
 				</span>
@@ -65,7 +65,7 @@ export default function AboutPage() {
 			</section>
 
 			{/* Stats Section */}
-			<section className="px-8 py-12 max-w-4xl mx-auto">
+			<section className="px-4 md:px-24 py-12 max-w-4xl mx-auto">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					{[
 						{ icon: '/patient.svg', label: 'Patients Served', value: '1M+' },
@@ -82,7 +82,7 @@ export default function AboutPage() {
 			</section>
 
 			{/* Leadership/Medical Team Section */}
-			<section className="px-8 py-20 bg-gradient-to-br from-pink-50 via-white to-purple-50">
+			<section className="px-4 md:px-24 py-20 bg-gradient-to-br from-pink-50 via-white to-purple-50">
 				<div className="max-w-5xl mx-auto">
 					<h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Leadership & Medical Team</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-10">
