@@ -29,7 +29,7 @@ export default function TreatmentsPage() {
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 1
 								</span>
-								<h4 className="text-2xl text-blacktxt font-semibold mb-2">Take the Quiz</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Take the Quiz</h4>
 								<p className="text-gray-600">Complete our comprehensive assessment to help us understand your unique symptoms and health history</p>
 							</div>
 							<div className="flex justify-center">
@@ -53,7 +53,7 @@ export default function TreatmentsPage() {
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 2
 								</span>
-								<h4 className="text-2xl text-blacktxt font-semibold mb-2">Connect with Specialists</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Take the Quiz</h4>
 								<p className="text-gray-600">Meet with Canadian menopause specialists via secure video call to discuss your personalized care plan</p>
 							</div>
 						</div>
@@ -63,7 +63,7 @@ export default function TreatmentsPage() {
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 3
 								</span>
-								<h4 className="text-2xl text-blacktxt font-semibold mb-2">Ongoing Care</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Take the Quiz</h4>
 								<p className="text-gray-600">Receive your personalized treatment plan </p>
 							</div>
 							<div className="flex justify-center">
@@ -81,7 +81,7 @@ export default function TreatmentsPage() {
 			{/* Treatments List Section */}
 			<section className="px-8 py-20 bg-gradient-to-r from-white via-pink-50 to-white">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+					<h2 className="text-3xl md:text-6xl font-bold text-gray-900 mb-12 text-center">
 						Our Treatments
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -135,7 +135,7 @@ export default function TreatmentsPage() {
 			{/* Testimonials */}
 			<section className="px-8 py-24 bg-gradient-to-br from-purple-50 via-white to-pink-50">
 				<div className="max-w-4xl mx-auto text-center">
-					<h2 className="text-3xl text-blacktxt font-bold mb-12">What Our Patients Say</h2>
+					<h2 className="text-3xl md:text-6xl text-blacktxt font-bold mb-12">What Our Patients Say</h2>
 					<div className="space-y-10">
 						{[
 							{ name: "Aisha B.", quote: "HormoneFit gave me my life back. The sleep, the focus, the calm — it's not magic, it's just the right care." },
@@ -154,7 +154,7 @@ export default function TreatmentsPage() {
 			{/* CTA */}
 			<section className="px-8 py-24 bg-gradient-to-r from-accent1 to-accent2 text-white text-center">
 				<div className="max-w-3xl mx-auto space-y-6">
-					<h2 className="text-4xl font-bold">Ready for Personalized care?</h2>
+					<h2 className="text-4xl md:text-6xl font-bold">Ready for Personalized care?</h2>
 					<p className="text-lg font-light">Your hormones deserve better. Start your journey with HormoneFit today.</p>
 					<a
 						href="/get-started"

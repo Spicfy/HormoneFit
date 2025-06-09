@@ -41,8 +41,6 @@ export default function Home() {
 	return (
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
 			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
-
-			
 				{/* Modern Hero Section Start */}
 				<section className="w-full bg-gradient-to-r from-[#ffeaea] to-[#ebc4f0] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
 					
@@ -132,7 +130,7 @@ export default function Home() {
 								Get Started
 							</a>
 							</div>
-							<h2 className="text-4xl md:text-5xl font-bold text-center md:text-right leading-tight">
+							<h2 className="text-4xl md:text-6xl font-bold text-center md:text-right leading-tight">
 								Your Hormones, Your<br />
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Health, Your Power
@@ -166,22 +164,25 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="pt-10 w-full">
-					<h2 className="text-4xl md:text-5xl font-bold text-center md:text-center leading-tight mb-25">
+				<div className="pt-5 w-full">
+					<h2 className="text-4xl md:text-7xl font-bold text-center md:text-center leading-tight mb-6">
 						How HormoneFit<br />
 						<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 							Works
 						</span>
 					</h2>
 					
-					<div className="max-w-6xl mx-auto flex flex-col gap-20">
+			{/* Step-by-Step Workflow (Felix-style) */}
+			<section className="px-8 py-25 bg-white">
+				<div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl mx-auto flex flex-col gap-20">
 						{/* Step 1 */}
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-65 items-center">
 							<div>
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 1
 								</span>
-								<h4 className="text-2xl font-semibold mb-2">Take the Quiz</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Take the Quiz</h4>
 								<p className="text-gray-600">Complete our comprehensive assessment to help us understand your unique symptoms and health history</p>
 							</div>
 							<div className="flex justify-center">
@@ -205,7 +206,7 @@ export default function Home() {
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 2
 								</span>
-								<h4 className="text-2xl font-semibold mb-2">Connect with Specialists</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Connect with Specialists</h4>
 								<p className="text-gray-600">Meet with Canadian menopause specialists via secure video call to discuss your personalized care plan</p>
 							</div>
 						</div>
@@ -215,7 +216,7 @@ export default function Home() {
 								<span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">
 									Step 3
 								</span>
-								<h4 className="text-2xl font-semibold mb-2">Ongoing Care</h4>
+								<h4 className="text-4xl md:text-4xl text-blacktxt font-semibold mb-2">Ongoing Care</h4>
 								<p className="text-gray-600">Receive your personalized treatment plan </p>
 							</div>
 							<div className="flex justify-center">
@@ -228,9 +229,11 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
+			</section>
+			</div>
 
-				<div className="px-8 md:px-24 py-40 text-center mb-30">
-					<h2 className="text-4xl md:text-5xl font-bold text-center md:text-center leading-tight mb-30">
+				<div className="px-8 md:px-24 py-30 text-center mb-30">
+					<h2 className="text-4xl md:text-7xl font-bold text-center md:text-center leading-tight mb-30">
 						By Canadians For Canadians<br />
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10 w-full max-w-5xl mx-auto">
@@ -280,7 +283,7 @@ export default function Home() {
 						</div>
 						{/* Testimonial Content */}
 						<div className="flex-1 flex flex-col justify-center items-start">
-							<h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Real Experts. Real Care.</h3>
+							<h3 className="text-6xl font-bold mb-4 bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Real Experts. Real Care.</h3>
 							<div className="mb-6">
 								<p className="text-lg text-gray-700 leading-relaxed mb-10">
 									Dr. Nathan Roth is a leading expert in women's health with over 30 years of experience in obstetrics, gynecology, and infertility. He is the current Chair of the American Congress of Obstetrics and Gynecology (ACOG) Section and Medical Director at Hope Fertility.
@@ -294,7 +297,7 @@ export default function Home() {
 				</div>
 
 				<div className="pt-25">
-					<h3 className="mb-10 font-bold text-4xl text-center">
+					<h3 className="mb-10 font-bold text-7xl text-center">
 						Pricing
 					</h3>
 					<div className="flex flex-row gap-8 justify-center mb-20">
@@ -388,7 +391,7 @@ export default function Home() {
 				<div className="w-full flex flex-col md:flex-row justify-center items-start gap-20 px-8 md:px-24 py-20">
 					{/* Left: Heading/Intro */}
 					<div className="md:w-1/3 w-full mb-10 md:mb-0">
-						<h2 className="text-4xl md:text-6xl font-bold mb-6 text-left bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Frequently Asked Questions</h2>
+						<h2 className="text-4xl md:text-7xl font-bold mb-6 text-left bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Frequently Asked Questions</h2>
 						<p className="text-lg text-gray-700 mb-2 text-left">Everything you want to know about menopause care, HormoneFit, and how we support your journey.</p>
 						<a href="#contact" className="inline-block mt-4 bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition">Contact Us</a>
 					</div>
