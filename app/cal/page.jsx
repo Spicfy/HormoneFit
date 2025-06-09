@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Calender from "../../components/calender";
+import Calender from "../../components/Calender";
 
 export default function Cal() {
 	const [selectedDate, setSelectedDate] = useState(new Date());

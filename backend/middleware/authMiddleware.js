@@ -1,21 +1,19 @@
-import JWT from 'jsonwebtoken';
-
- const protect =async (req, res, next) => {
-    try{
-        const token = req.headers["authorization"].split(" ")[1];
-        JWT.verify(token, process.env.JWT_SECRET, (err, decode) => {
-            if(err){
-                return res.status(200).send({
-                    success: false,
-                    message: "Invalid token",
-                })
-            }
-        })
-    }catch(error){
-        return res.status(500).send({
+const protect = async (req, res, next) => {
+    try {
+        // Check if user is logged in via session
+        if (!req.session || !req.session.userId) {
+            return res.status(401).json({
+                success: false,
+                message: "Please login to access this resource"
+            });
+        }
+        next();
+    } catch (error) {
+        return res.status(500).json({
             success: false,
-            message: "Server error",
-        })
+            message: "Server error"
+        });
     }
 }
+
 export default protect;

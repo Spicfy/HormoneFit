@@ -34,14 +34,14 @@ export const bookAppointment = async (req, res) => {
         await doctorModel.findByIdAndUpdate(doctorId, {slots_booked});
 
         res.json({success: true, message: "Appointment booked successfully", booking: savedBooking});
-        
+
 
 
     }catch(error){
         res.json({success: false, message: error.message})
     }
     //cancel appointment API
- 
+
 }
     export const cancelAppointment = async (req, res) => {
         try{
@@ -53,7 +53,7 @@ export const bookAppointment = async (req, res) => {
                 return res.json({success: false, message: "You are not authorized to cancel to cancel this appointment."})
             }
             await Appointment.findByIdAndUpdate()
-            
+
 
         }catch(error){
         res.json({success: false, message: error.message});
@@ -61,7 +61,7 @@ export const bookAppointment = async (req, res) => {
 }
 
 export const listAppointments = async (req, res) => {
-    try{    
+    try{
         const {userId} = req.body;
 
         const appointments = await Appointment.find({user_id: userId})

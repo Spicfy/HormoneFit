@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {useRouter} from "next/navigation";
-import Header from "@/components/header";
+import { useRouter } from "next/navigation";
+import Header from "@/components/Header";
 import Link from "next/link";
 import axios from "axios";
 
@@ -31,7 +31,7 @@ export default function Login() {
 				},
 				{
 					withCredentials: true,
-				}
+				},
 			);
 
 			if (response.status === 200 && response.data.success) {
@@ -104,7 +104,7 @@ export default function Login() {
 						{/* Error Message */}
 						{errorReason && (
 							<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl">
-								Invalid email or password. Please try again. 
+								Invalid email or password. Please try again.
 							</div>
 						)}
 

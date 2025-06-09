@@ -1,0 +1,13 @@
+POST http://localhost:4000/api/auth/register
+content-type: application/json
+
+{
+	"first_name": "Tester",
+	"last_name": "Test",
+	"email": "Cali@gmail.com",
+	"password": "1234567321",
+	"date_of_birth": "2025-06-05",
+	"sex": "male",
+	"postalCode": "21321312",
+	"healthCardNumber": "213213122312"
+}

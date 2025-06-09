@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Link from "next/link";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ export default function Signup() {
 	});
 	const [samePass, setSamePass] = useState(false);
 	const [errorReason, setErrorReason] = useState(false);
-	const [successMessage, setSuccessMessage] = useState("");	
+	const [successMessage, setSuccessMessage] = useState("");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -48,7 +48,7 @@ export default function Signup() {
 			{
 				withCredentials: true,
 			}
-			
+
 	);
 
 	if(response.data.success){
