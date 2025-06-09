@@ -9,7 +9,7 @@ import User from "../Models/User.js";
 
 export const bookAppointment = async (req, res) => {
     try{
-        const {userId, doctorId, date, time, type} = req.body
+        const {userId, doctorId, date, start_time, end_time, type} = req.body
 
         const docData= await Doctor.findById(doctorId).select('-password');
         if(!docData.available){
@@ -24,7 +24,8 @@ export const bookAppointment = async (req, res) => {
             user_id: userId,
             doctor_id: doctorId,
             appointment_date: date,
-            appointment_time: time,
+            appointment_start_time: start_time,
+            appointment_end_time: end_time,
             type: type,
             fee: docData.doctor_fee
         })
@@ -47,12 +48,12 @@ export const bookAppointment = async (req, res) => {
         try{
             const {userId, AppointmentId} = req.body;
 
-            const bookingData = await Appointment.findById(bookingId);
+            const bookingData = await Appointment.findById(AppointmentId);
             //verify appointment user
             if(bookingData.user_id !== userId){
                 return res.json({success: false, message: "You are not authorized to cancel to cancel this appointment."})
             }
-            await Appointment.findByIdAndUpdate()
+            await Appointment.findByIdAndUpdate(AppointmentId, {cancelled: true, status: 'cancelled' })
             
 
         }catch(error){
@@ -71,4 +72,6 @@ export const listAppointments = async (req, res) => {
     }catch(error){
         res.json({success: false, message: error.message});
     }
+
+
 }
