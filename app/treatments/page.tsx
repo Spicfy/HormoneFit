@@ -18,7 +18,7 @@ export default function TreatmentsPage() {
 	return (
 		<main className="bg-gradient-to-b from-white to-accent1/5 min-h-screen font-sans text-blacktxt">
 			{/* Main Heading Section */}
-			<section className="px-8 py-24 text-center">
+			<section className="px-8 py-24 text-center bg-gradient-to-r from-[#f3e8ff] to-[#e0cff1]">
 				<div className="max-w-4xl mx-auto">
 					<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent mb-4 leading-tight">
 						Comprehensive Menopause Treatments
@@ -33,40 +33,40 @@ export default function TreatmentsPage() {
 			<section className="w-full bg-white py-4 border-b border-gray-200">
 				<div className="max-w-5xl mx-auto flex justify-center space-x-2 md:space-x-4">
 					<button
-						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-colors ${
+						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-all ${
 							activeTab === "hormone-therapy"
-								? "bg-accent1 text-white shadow"
-								: "text-gray-700 hover:text-accent1 hover:bg-gray-50"
+								? "bg-gradient-to-r from-accent1 to-accent2 text-white shadow"
+								: "bg-white text-accent1 hover:bg-accent1/10"
 						}`}
 						onClick={() => setActiveTab("hormone-therapy")}
 					>
 						Hormone Therapy
 					</button>
 					<button
-						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-colors ${
+						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-all ${
 							activeTab === "non-hormonal"
-								? "bg-accent1 text-white shadow"
-								: "text-gray-700 hover:text-accent1 hover:bg-gray-50"
+								? "bg-gradient-to-r from-accent1 to-accent2 text-white shadow"
+								: "bg-white text-accent1 hover:bg-accent1/10"
 						}`}
 						onClick={() => setActiveTab("non-hormonal")}
 					>
 						Non-Hormonal
 					</button>
 					<button
-						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-colors ${
+						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-all ${
 							activeTab === "lifestyle"
-								? "bg-accent1 text-white shadow"
-								: "text-gray-700 hover:text-accent1 hover:bg-gray-50"
+								? "bg-gradient-to-r from-accent1 to-accent2 text-white shadow"
+								: "bg-white text-accent1 hover:bg-accent1/10"
 						}`}
 						onClick={() => setActiveTab("lifestyle")}
 					>
 						Lifestyle
 					</button>
 					<button
-						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-colors ${
+						className={`px-4 py-2 md:px-6 md:py-3 rounded-md text-base font-semibold transition-all ${
 							activeTab === "products"
-								? "bg-accent1 text-white shadow"
-								: "text-gray-700 hover:text-accent1 hover:bg-gray-50"
+								? "bg-gradient-to-r from-accent1 to-accent2 text-white shadow"
+								: "bg-white text-accent1 hover:bg-accent1/10"
 						}`}
 						onClick={() => setActiveTab("products")}
 					>
@@ -285,6 +285,27 @@ export default function TreatmentsPage() {
 						</div>
 					)}
 				</div>
+			</section>
+
+			{/* CTA Section */}
+			<section
+				className="w-full py-24 px-4 flex flex-col items-center justify-center"
+				style={{
+					background: "linear-gradient(90deg, #e040fb 0%, #a259e6 100%)"
+				}}
+			>
+				<h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-4">
+					Ready to Take Control of Your Menopause Journey?
+				</h2>
+				<p className="text-lg text-white text-center mb-8 max-w-2xl">
+					Join thousands of Canadian women who have transformed their menopause experience with HormoneFit.
+				</p>
+				<Link
+					href="/quiz"
+					className="bg-white text-accent1 font-semibold rounded-lg px-8 py-3 shadow hover:bg-accent2 hover:text-white transition"
+				>
+					Get Started
+				</Link>
 			</section>
 		</main>
 	);

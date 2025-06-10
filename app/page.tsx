@@ -42,7 +42,7 @@ export default function Home() {
 		<div className="font-[family-name:var(--font-geist-sans)] items-center justify-items-center min-h-screen  text-blacktxt bg-whitetxt">
 			<main className="font-sans text-blacktxt flex flex-col items-center w-full">
 				{/* Modern Hero Section Start */}
-				<section className="w-full bg-gradient-to-r from-[#f3e8ff] to-[#e0cff1] py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+				<section className="w-full bg-gradient-to-r from-accent1 to-accent2 py-30 px-8 flex flex-col md:flex-row items-center justify-between gap-12">
 					
 				<div className="max-w-xl space-y-10 md:ml-30 lg:ml-30">
 
@@ -52,26 +52,26 @@ export default function Home() {
 									<img key={i} src="/star-1.svg" alt="star" style={{ width: 28, height: 28, filter: 'invert(50%) sepia(80%) saturate(400%) hue-rotate(250deg)' }} />
 								))}
 							</span>
-							<p className="ml-3 text-lg text-blacktxt font-medium">
+							<p className="ml-3 text-lg text-whitetxt font-medium">
 								25,000+ Reviews
 							</p>
 						</div>
-						<h1 className="font-bold text-5xl md:text-6xl leading-tight">
-							Personalized <br /> Menopause <br /> Care for <span className="bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Canadians</span>
+						<h1 className="font-bold text-5xl md:text-6xl leading-tight text-white">
+							Personalized <br /> Menopause <br /> Care for Canadians
 						</h1>
-						<h2 className="font-medium text-lg text-blacktxt opacity-75">
+						<h2 className="font-medium text-lg text-white opacity-75">
 							Personalized menopause care — without the waiting room
 						</h2>
 						<div className="flex flex-row gap-4 mt-6">
 							<a
 								href=""
-								className="bg-gradient-to-r from-accent1 to-accent2 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
+								className="bg-white text-accent1 px-8 py-4 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
 							>
 								Take the Quiz
 							</a>
 							<a
 								href=""
-								className="bg-white text-accent1 border border-accent1 px-8 py-4 rounded-xl font-bold shadow-md hover:bg-accent1 hover:text-white transition"
+								className="bg-transparent text-white border border-white px-8 py-4 rounded-xl font-bold shadow-md hover:bg-white hover:text-accent1 transition"
 							>
 								Get Started
 							</a>
@@ -222,7 +222,7 @@ export default function Home() {
 							Comprehensive Treatment Options
 						</h2>
 						<p className="text-lg text-gray-700 text-center mb-12 max-w-2xl">
-							We offer a range of evidence-based treatments tailored to your specific needs
+							We offer a range of evidence-based treatments tailored to your specific needs.
 						</p>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
 							{/* Card 1 */}
@@ -272,7 +272,7 @@ export default function Home() {
 
 
 				{/* Pricing Section */}
-				<section className="w-full py-24 px-4 md:px-0 bg-gradient-to-b from-white via-[#f8f6fa] to-[#ffe3fe]">
+				<section className="w-full py-24 px-4 md:px-0 bg-gradient-to-b from-white via-[#f8f6fa] to-[#d7a6ff]">
 					<div className="max-w-5xl mx-auto flex flex-col items-center">
 						<h2 className="text-3xl md:text-6xl bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent font-bold text-center mb-2 text-blacktxt">Personalized Care for Your Menopause Journey</h2>
 						<p className="text-lg text-gray-700 text-center mb-8">Choose the option that best supports your wellness needs</p>
@@ -414,7 +414,7 @@ export default function Home() {
 					{/* Left: Heading/Intro */}
 					<div className="md:w-1/3 w-full mb-10 md:mb-0">
 						<h2 className="text-4xl md:text-7xl font-bold mb-6 text-left bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Frequently Asked Questions</h2>
-						<p className="text-lg text-gray-700 mb-2 text-left">Everything you want to know about menopause care, HormoneFit, and how we support your journey</p>
+						<p className="text-lg text-gray-700 mb-2 text-left">Everything you want to know about menopause care, HormoneFit, and how we support your journey.</p>
 						<a href="#contact" className="inline-block mt-4 bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition">Contact Us</a>
 					</div>
 					{/* Right: Accordion */}
@@ -440,7 +440,7 @@ export default function Home() {
 						href="/quiz"
 						className="bg-white text-accent1 font-semibold rounded-lg px-8 py-3 shadow hover:bg-accent2 hover:text-white transition"
 					>
-						Get Started
+						Take the Quiz
 					</a>
 				</section>
 
