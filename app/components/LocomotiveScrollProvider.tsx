@@ -19,6 +19,7 @@ export default function LocomotiveScrollProvider({ children }: { children: React
         smooth: true,
         multiplier: 1,
         class: "is-revealed",
+        scrollbar: true,
         smartphone: {
           smooth: true,
           multiplier: 1,
