@@ -3,6 +3,10 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
+import {sendEmail} from "../configs/nodemailer.js";
+import Token from "../Models/Token.js"
+import crypto from "crypto"
+import { generateVericationEmailHTML } from "../mail/emailhtml.js";
 
 export const register = async (req, res) =>{
     const {first_name, last_name, email, password, date_of_birth, sex, postalCode,  healthCardNumber} = req.body;
@@ -24,7 +28,6 @@ export const register = async (req, res) =>{
     const hashedPassword = await bcrypt.hash(password, salt)
 
     const user = new User({
-        _id: new mongoose.Types.ObjectId(),
         first_name,
         last_name,
         email,
@@ -49,10 +52,44 @@ secure: ensures cookie is sent only over HTTPS in production
         sameSite: process.env.NODE_ENV === 'production'? 'none': 'strict',
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
-    return res.json({success:true});
+
+    const verifyToken = await new Token({
+        userId: savedUser._id,
+        token: crypto.randomBytes(32).toString("hex")
+    }).save();
+
+    const verificationUrl = `${process.env.BASE_URL}api/users/${savedUser._id}/verify/${verifyToken.token}`;
+    const emailText = `Hello ${user.first_name} ${user.last_name},
+
+    Welcome to HormoneFit! We are excited to have you on board. 
+
+    Please click the link below to verify your account:
+    ${verificationUrl}
+
+    This link will expire in 24 hours.
+
+    Best regards,
+    The HormoneFit Team`;
+
+
+    const emailHTML = generateVericationEmailHTML(savedUser.first_name, savedUser.last_name, verificationUrl);
+
+    const emailResult = await sendEmail(
+        savedUser.email,
+        'Welcome to HormoneFit! Please verify your email',
+        emailText,
+        emailHTML
+    )
+    if(!emailResult.success){
+        console.error("Failed to send verification email:", emailResult.message);
+        return res.status(500).json({message: "Failed to send verification email", success: false});
+    }
+
+
+   return res.json({success: true, message: "User registered successfully, please check your email to verify your account."});
     }catch(error){
         console.error("Error during registration:", error);
-        return res.status(500).json({message: "Internal server error idiot" + error.message, success: false});
+        return res.status(500).json({message: "Internal server error " + error.message, success: false});
     }
 };
 
@@ -114,3 +151,4 @@ export const forgotPassword = async(req, res) => {
         return res.status(500).json({success: false, message: "Internal server error: " + error.message});
     }
 }
+
