@@ -29,10 +29,10 @@ body {
 }
 
 @theme {
-	--color-primary: #ffeaea;
-	--color-secondary: #ffdcdc;
-	--color-accent1: #e77a7a;
-	--color-accent2: #f09c9c;
+	--color-primary: #f3e8ff;
+	--color-secondary: #e0cff1;
+	--color-accent1: #a259e6;
+	--color-accent2: #e040fb;
 	--color-secondarytxt: #112335;
 	--color-blacktxt: #090909;
 	--color-whitetxt: #ffffff;
