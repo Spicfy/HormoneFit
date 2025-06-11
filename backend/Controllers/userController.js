@@ -1,5 +1,4 @@
-// API to book appointment
-import { useDeprecatedAnimatedState } from "framer-motion";
+
 import Appointment from "../Models/Appointment.js";
 import Doctor from "../Models/Doctor.js";
 import User from "../Models/User.js";
