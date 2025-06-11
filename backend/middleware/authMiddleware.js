@@ -1,24 +1,21 @@
 import JWT from 'jsonwebtoken';
-    const protect = async (req, res, next) => {
-    const {token} = req.cookies;
 
-    if(!token){
-        return res.json({success: false, message: 'Not Authorized'});
-    }
-
+ const protect =async (req, res, next) => {
     try{
-        const tokenDecode = JWT.verify(token, process.env.JWT_SECRET)
-
-        if(tokenDecode.id){
-            req.body.userId = tokenDecode.id
-        }else{
-            return res.json({success: false, message: 'Not Authorized. Invalid token.'});
-        }
-        next();
+        const token = req.headers["authorization"].split(" ")[1];
+        JWT.verify(token, process.env.JWT_SECRET, (err, decode) => {
+            if(err){
+                return res.status(200).send({
+                    success: false,
+                    message: "Invalid token",
+                })
+            }
+        })
     }catch(error){
-        console.error("Error in userAuth middleware:", error);
-        return res.status(500).json({success: false, message: 'Internal server error'});
+        return res.status(500).send({
+            success: false,
+            message: "Server error",
+        })
     }
 }
-
 export default protect;

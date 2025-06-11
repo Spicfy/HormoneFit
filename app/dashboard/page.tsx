@@ -12,12 +12,12 @@ export default function Dashboard() {
     setIsLoggingOut(true);
     
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/logout', {}, {
+      const response = await axios.post('http://localhost:3000/api/auth/logout', {}, {
         withCredentials: true,
       });
       
       if (response.data.success) {
-        router.push('/#');
+        router.push('/auth');
       }
     } catch (error) {
       console.error('Logout error:', error);
