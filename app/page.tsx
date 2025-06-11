@@ -299,7 +299,7 @@ export default function Home() {
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
 							{/* Pay Per Visit */}
 							<div className="bg-whitetxt rounded-2xl shadow p-8 flex flex-col items-center border border-accent2/30">
-								<h3 className="text-xl font-bold text-blacktxt mb-2">Pay Per Visit</h3>
+								<h3 className="text-xl font-bold text-blacktxt mb-2">HormoneFit</h3>
 								<p className="text-secondarytxt mb-4">For occasional care needs</p>
 								<div className="text-4xl font-bold text-blacktxt mb-1">$125 <span className="text-base font-normal text-secondarytxt">per visit</span></div>
 								<ul className="text-secondarytxt text-base space-y-2 mb-8 mt-4 w-full">
@@ -313,8 +313,8 @@ export default function Home() {
 							</div>
 							{/* Membership */}
 							<div className="bg-whitetxt rounded-2xl shadow-lg p-8 flex flex-col items-center border-2 border-accent2 relative scale-105 z-10">
-								<span className="absolute top-4 right-4 bg-accent1 text-white text-xs font-bold px-3 py-1 rounded-full">★ Most Popular</span>
-								<h3 className="text-xl font-bold text-blacktxt mb-2">Membership</h3>
+								<span className="absolute top-4 right-4 bg-accent1 text-white text-xs font-bold px-3 py-0.9 rounded-full">★ Most Popular</span>
+								<h3 className="text-xl font-bold text-blacktxt mb-2">HormoneFit+</h3>
 								<p className="text-secondarytxt mb-4">Comprehensive ongoing care</p>
 								<div className="text-4xl font-bold text-blacktxt mb-1">
 									{isYearly ? "$499" : "$49"}

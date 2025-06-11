@@ -117,8 +117,8 @@ export default function AboutPage() {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						{/* Specialized Expertise */}
 						<div className="bg-accent1/10 rounded-lg p-6 shadow-sm border border-accent1/20">
-							<h3 className="text-2xl md:text-3xl font-bold text-accent1 mb-2">Specialized Expertise</h3>
-							<p className="text-secondarytxt">
+							<h3 className="text-3xl md:text-4xl font-bold text-accent1 mb-2">Specialized Expertise</h3>
+							<p className="text-secondarytxt text-lg">
 								Our doctors are specifically trained in menopause management and stay current with the latest
 								research and treatment options. This specialized focus means you receive care from practitioners who
 								truly understand the complexities of menopause.
@@ -126,8 +126,8 @@ export default function AboutPage() {
 						</div>
 						{/* Comprehensive Care */}
 						<div className="bg-accent2/10 rounded-lg p-6 shadow-sm border border-accent2/20">
-							<h3 className="text-2xl md:text-3xl font-bold text-accent2 mb-2">Comprehensive Care</h3>
-							<p className="text-secondarytxt">
+							<h3 className="text-3xl md:text-4xl font-bold text-accent2 mb-2">Comprehensive Care</h3>
+							<p className="text-secondarytxt text-lg">
 								We address all aspects of menopause—from hot flashes and sleep disturbances to mood changes,
 								sexual health, and long-term health considerations like bone and heart health. Our treatment plans are
 								truly comprehensive.
@@ -135,8 +135,8 @@ export default function AboutPage() {
 						</div>
 						{/* Convenient Virtual Care */}
 						<div className="bg-accent1/10 rounded-lg p-6 shadow-sm border border-accent1/20">
-							<h3 className="text-2xl md:text-3xl font-bold text-accent1 mb-2">Convenient Virtual Care</h3>
-							<p className="text-secondarytxt">
+							<h3 className="text-3xl md:text-4xl font-bold text-accent1 mb-2">Convenient Virtual Care</h3>
+							<p className="text-secondarytxt text-lg">
 								Our virtual consultation model means you can access
 								specialized menopause care from the comfort of your
 								home. No more rushing to appointments or sitting in
@@ -146,8 +146,8 @@ export default function AboutPage() {
 						
 						{/* Full Spectrum of Options */}
 						<div className="bg-accent2/10 rounded-lg p-6 shadow-sm border border-accent2/20">
-							<h3 className="text-2xl md:text-3xl font-bold text-accent2 mb-2">Full Spectrum of Options</h3>
-							<p className="text-secondarytxt">
+							<h3 className="text-3xl md:text-4xl font-bold text-accent2 mb-2">Full Spectrum of Options</h3>
+							<p className="text-secondarytxt text-lg">
 								We offer the complete range of treatment options—
 								from hormone therapy and prescription medications
 								to supplements, lifestyle approaches, and cutting-
