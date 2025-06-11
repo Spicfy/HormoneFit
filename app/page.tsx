@@ -228,7 +228,7 @@ export default function Home() {
 							{/* Card 1 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent1/10 mb-4">
-									<img src="/leaf.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Hormone Therapy</h3>
 								<p className="text-secondarytxt">
@@ -238,7 +238,7 @@ export default function Home() {
 							{/* Card 2 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent2/10 mb-4">
-									<img src="/pill.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Non-Hormonal Medications</h3>
 								<p className="text-secondarytxt">
@@ -248,7 +248,7 @@ export default function Home() {
 							{/* Card 3 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent1/10 mb-4">
-									<img src="/lifestyle.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 						</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Lifestyle Modifications</h3>
 								<p className="text-secondarytxt">
@@ -258,7 +258,7 @@ export default function Home() {
 							{/* Card 4 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent2/10 mb-4">
-									<img src="/supplement.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Supplements & Products</h3>
 								<p className="text-secondarytxt">

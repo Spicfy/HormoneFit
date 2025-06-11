@@ -23,7 +23,7 @@ export default function TreatmentsPage() {
 					<h1 className="text-4xl md:text-6xl font-bold text-whitetxt leading-tight">
 						Comprehensive Menopause Treatments		
 					</h1>
-					<h2 className="text-white py-10 md:text-1xl">Evidence-based treatments tailored to your unique symptoms and health history.</h2>
+					<h2 className="text-white">Evidence-based treatments tailored to your unique symptoms and health history.</h2>
 
 					
 				</div>

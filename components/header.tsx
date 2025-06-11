@@ -64,7 +64,7 @@ export default function Header() {
 					<nav className="hidden md:flex space-x-6">
 						<Link href="/about" className="hover:text-accent1 transition-colors">About</Link>
 						<Link href="/treatments" className="hover:text-accent1 transition-colors">Treatments</Link>
-						<Link href="/pricing" className="hover:text-accent1 transition-colors">Pricing</Link>
+						<Link href="/price" className="hover:text-accent1 transition-colors">Pricing</Link>
 						<Link href="/faq" className="hover:text-accent1 transition-colors">FAQ</Link>
 						<Link href="/contact" className="hover:text-accent1 transition-colors">Contact</Link>
 					</nav>

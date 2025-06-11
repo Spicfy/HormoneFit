@@ -110,7 +110,7 @@ export default function FAQPage() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
 
   return (
-    <main className="bg-whitetxt min-h-screen font-sans text-blacktxt py-20 px-4 md:px-24">
+    <main className="bg-whitetxt min-h-screen font-sans text-blacktxt py-30 px-4 md:px-24">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent mb-4">
           Frequently Asked Questions
