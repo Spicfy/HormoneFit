@@ -1,116 +1,160 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link"; // Import Link for the buttons
 
-interface FAQ {
-  q: string;
-  a: string;
-}
-interface Section {
-  section: string;
-  faqs: FAQ[];
-}
-
-const FAQ_DATA: Section[] = [
+// Consolidate all FAQ data into a single array as shown in the image
+const faqData = [
   {
-    section: "Hormone Fit",
-    faqs: [
-      { q: "What is Hormone Fit?", a: "HormoneFit is a virtual clinic specializing in personalized menopause care for women across Canada." },
-      { q: "Who can use Hormone Fit?", a: "HormoneFit is designed for women experiencing menopause or perimenopause symptoms who want expert, personalized care." },
-      { q: "Can I be accurately assessed remotely?", a: "Yes! Our clinicians use comprehensive assessments and secure video visits to understand your symptoms and needs." },
-      { q: "Does HormoneFit replace my doctor?", a: "HormoneFit works alongside your primary care provider to offer specialized menopause support." },
-      { q: "It's an emergency. What do I do?", a: "If you are experiencing a medical emergency, please call 911 or go to your nearest emergency room." },
-    ],
+    question: "What is the difference between perimenopause and menopause?",
+    answer:
+      "Perimenopause is the transitional phase leading up to menopause, typically lasting 4-8 years. During this time, you may experience irregular periods and begin to have symptoms like hot flashes as hormone levels fluctuate. Menopause is officially diagnosed when you've gone 12 consecutive months without a period, marking the end of reproductive years. Post-menopause refers to the years following menopause.",
   },
   {
-    section: "Online Visits",
-    faqs: [
-      { q: "How does the visit work?", a: "You'll complete an online assessment and meet with a menopause specialist via secure video call." },
-      { q: "How quickly will a healthcare practitioner review my online visit?", a: "Most visits are reviewed within 1-2 business days." },
-      { q: "Do I need to complete my online visit at a scheduled time?", a: "You can complete your assessment anytime, and schedule your video visit at your convenience." },
-      { q: "I completed my online visit. Now what?", a: "Your care team will review your information and reach out with next steps or a treatment plan." },
-      { q: "Can I just get the treatment and skip the online visit?", a: "A virtual assessment is required to ensure safe, personalized care." },
-      { q: "Does the online visit require a phone or video appointment?", a: "Most visits are done by secure video, but some follow-ups may be by phone or secure messaging." },
-    ],
+    question: "How can I manage hot flashes and night sweats?",
+    answer:
+      "Hot flashes and night sweats can be managed through various approaches including hormone therapy, non-hormonal medications, and lifestyle adjustments like dressing in layers and avoiding triggers.",
   },
   {
-    section: "Pricing and Payment",
-    faqs: [
-      { q: "How much is the online visit?", a: "$49 per month for unlimited virtual consultations, plus a one-time $99 program fee." },
-      { q: "How much will my treatment cost?", a: "Treatment costs vary based on your personalized plan. All pricing is transparent before you start." },
-      { q: "How do I change my credit card information?", a: "You can update your payment details in your secure patient portal." },
-      { q: "How much does a checkup visit cost?", a: "Checkup visits are included in your monthly membership." },
-      { q: "Why do I see a transaction on my credit card for my denied online visit?", a: "If your visit is not approved, you will not be charged." },
-      { q: "Why can't I see medication prices on the website?", a: "Medication prices depend on your insurance and province. Your care team will review all costs with you." },
-      { q: "What payment methods do you accept?", a: "We accept all major credit cards." },
-    ],
+    question: "Why am I experiencing mood changes during menopause?",
+    answer:
+      "Hormonal fluctuations during menopause, particularly drops in estrogen, can impact brain chemistry and lead to mood swings, irritability, anxiety, and even depression. Stress and sleep disturbances can also contribute.",
   },
   {
-    section: "Our Healthcare Practitioners",
-    faqs: [
-      { q: "How do I communicate with my HormoneFit practitioner?", a: "You can message your care team anytime through your secure portal." },
-      { q: "What does your medical team do?", a: "Our team reviews your symptoms, creates your care plan, and supports you throughout your journey." },
-      { q: "Who are the practitioners that will be reviewing my online visit?", a: "All practitioners are licensed Canadian healthcare professionals specializing in menopause care." },
-      { q: "Can I see the same HormoneFit practitioner after my initial assessment?", a: "We do our best to provide continuity of care with the same provider whenever possible." },
-      { q: "Can you refer me to a psychiatrist or psychologist?", a: "If needed, we can help coordinate referrals to mental health specialists." },
-    ],
+    question: "What can I do about vaginal dryness and painful intercourse?",
+    answer:
+      "Vaginal dryness and painful intercourse are common. Options include vaginal estrogen therapy (creams, rings, tablets), lubricants, moisturizers, and certain non-hormonal oral medications.",
   },
   {
-    section: "Privacy and Security",
-    faqs: [
-      { q: "Is this legal?", a: "Yes, HormoneFit operates in compliance with all Canadian healthcare regulations." },
-      { q: "Is this safe?", a: "Your privacy and safety are our top priorities. All data is encrypted and confidential." },
-      { q: "Is my information private and secure?", a: "Yes, we use industry-leading security protocols to protect your information." },
-      { q: "How is my privacy protected?", a: "We never share your information without your consent." },
-      { q: "Can I have my medical records shared with my primary care provider?", a: "Yes, we can securely share your records with your permission." },
-    ],
+    question: "Is hormone replacement therapy (HRT) safe?",
+    answer:
+      "For most healthy women experiencing menopause symptoms, HRT is considered safe and effective when initiated appropriately and monitored by a healthcare professional. Individual risks and benefits should be discussed with your doctor.",
+  },
+  {
+    question: "Why am I gaining weight during menopause?",
+    answer:
+      "Menopausal weight gain, particularly around the abdomen, results from several factors: hormonal changes that affect fat distribution, loss of muscle mass that lowers metabolic rate, age-related metabolic slowdown, and lifestyle factors. This midlife weight gain increases risks for heart disease, diabetes, and certain cancers. Management strategies include increasing physical activity (both cardio and strength training), adjusting caloric intake to match changing metabolism, prioritizing protein and fiber, limiting processed foods and alcohol, and managing stress and sleep.",
+  },
+  {
+    question: "What can I do about brain fog and memory issues?",
+    answer:
+      "Strategies for brain fog include hormone therapy (for some), regular exercise, adequate sleep, a healthy diet, stress management, and cognitive exercises. Discussing persistent concerns with a doctor is important.",
+  },
+  {
+    question: "How does menopause affect my bone health?",
+    answer:
+      "Estrogen plays a crucial role in maintaining bone density. After menopause, declining estrogen levels can lead to accelerated bone loss, increasing the risk of osteoporosis and fractures. Calcium, Vitamin D, and weight-bearing exercise are vital.",
+  },
+  {
+    question: "What lifestyle changes can help manage menopause symptoms?",
+    answer:
+      "Lifestyle changes include a balanced diet, regular exercise, stress reduction techniques (e.g., yoga, meditation), adequate sleep, avoiding triggers for hot flashes (e.g., spicy foods, caffeine, alcohol), and quitting smoking.",
+  },
+  {
+    question: "Are there natural or alternative treatments for menopause symptoms?",
+    answer:
+      "Some women explore natural remedies like black cohosh, soy isoflavones, or evening primrose oil. Lifestyle changes are also natural approaches. It's essential to discuss any alternative treatments with a healthcare provider to ensure safety and effectiveness.",
+  },
+  {
+    question: "How can I improve my sleep during menopause?",
+    answer:
+      "Improving sleep involves good sleep hygiene (consistent sleep schedule, dark room, no screens before bed), managing hot flashes, stress reduction, and sometimes hormone therapy or other medications if needed.",
+  },
+  {
+    question: "How does menopause affect my heart health?",
+    answer:
+      "Estrogen has a protective effect on the heart. After menopause, the risk of cardiovascular disease increases due to changes in cholesterol levels, blood pressure, and fat distribution. Maintaining a healthy lifestyle and regular check-ups are crucial.",
   },
 ];
 
-export default function FAQPage() {
-  const [openQuestionIndex, setOpenQuestionIndex] = useState<string | null>(null);
+interface FAQItemProps {
+  question: string;
+  answer: string;
+}
+
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <main className="bg-white min-h-screen font-sans pb-0">
-      <div className="w-full min-h-screen bg-white text-black px-4 md:px-24 py-16">
-        <h1 className="text-4xl md:text-6xl font-bold mb-12 text-left">Frequently Asked Questions</h1>
-        {FAQ_DATA.map((section) => (
-          <div key={section.section} className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-accent1">{section.section}</h2>
-            {section.faqs.map((faq, idx) => {
-              const uniqueId = `${section.section}-${idx}`;
-              const isOpen = openQuestionIndex === uniqueId;
-              return (
-                <div key={uniqueId} className="border-b border-gray-200 mb-4">
+    <div className="border-b border-gray-200 last:border-b-0">
                   <button
-                    className={`w-full text-left py-4 flex justify-between items-center transition-colors ${
-                      isOpen
-                        ? "text-accent1 font-bold text-xl"
-                        : "text-black font-medium text-lg"
-                    }`}
-                    onClick={() =>
-                      setOpenQuestionIndex(isOpen ? null : uniqueId)
-                    }
-                  >
-                    {faq.q}
-                    <span
-                      className={`ml-4 transition-transform duration-200 text-2xl text-gray-400 ${
-                        isOpen ? "rotate-180 text-accent1" : ""
-                      }`}
-                    >
-                      ⌄
-                    </span>
+        className="flex justify-between items-center w-full text-left py-4 font-semibold text-lg text-accent1 hover:text-accent2 transition-colors duration-200"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {question}
+        <svg
+          className={`w-5 h-5 transition-transform duration-200 text-accent1 ${isOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d={isOpen ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"}
+          ></path>
+        </svg>
                   </button>
                   {isOpen && (
-                    <div className="pb-4 text-gray-700 text-base px-2">
-                      {faq.a}
-                    </div>
+        <p className="text-secondarytxt text-base pb-4 pr-6 leading-relaxed">
+          {answer}
+        </p>
                   )}
                 </div>
               );
-            })}
-          </div>
+};
+
+export default function FAQPage() {
+  const [openQuestion, setOpenQuestion] = useState<number | null>(null);
+
+  return (
+    <main className="bg-whitetxt min-h-screen font-sans text-blacktxt py-20 px-4 md:px-24">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent mb-4">
+          Frequently Asked Questions
+        </h1>
+        <p className="text-lg text-secondarytxt mb-12">
+          Find answers to common questions about menopause symptoms and treatments
+        </p>
+        <Link
+          href="#" // Placeholder for download link
+          className="inline-flex items-center bg-transparent border border-accent1 text-accent1 px-6 py-3 rounded-xl font-semibold hover:bg-accent1 hover:text-whitetxt transition mb-12"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-5 h-5 mr-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+            />
+          </svg>
+          Download FAQ Guide
+        </Link>
+
+        <div className="space-y-4 text-left">
+          {faqData.map((faq, index) => (
+            <FAQItem
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+            />
         ))}
+      </div>
+
+        <Link
+          href="/quiz" // Placeholder for quiz link
+          className="mt-12 inline-block bg-gradient-to-r from-accent1 to-accent2 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition"
+        >
+          Take Our Menopause Assessment Quiz
+        </Link>
       </div>
     </main>
   );
