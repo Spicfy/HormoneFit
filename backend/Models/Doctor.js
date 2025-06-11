@@ -24,16 +24,13 @@ const doctorSchema = new mongoose.Schema({
     date_of_birth: {
         type: Date, required: true
     },
-    specialty: {
-        type: String, required: true
-    },
     address: {
         type: String
     },
     phone: {
         type: String, required: true
     },
-    specialty: {
+    specialization: {
         type: String, required: true
     },
     education: [{

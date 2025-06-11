@@ -1,7 +1,7 @@
 import User from "../Models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import validator from "validator";
 import nodemailer from "nodemailer";
 import {sendEmail} from "../configs/nodemailer.js";
 import Token from "../Models/Token.js"
@@ -13,6 +13,9 @@ export const register = async (req, res) =>{
     if(!first_name || !last_name || !email || !password || !date_of_birth || !sex || !postalCode || !healthCardNumber){
 
         return res.status(400).json({message: "All fields are required", success: false});
+    }
+    if(!validator.isEmail(email)){
+        return res.status(400).json({message: "Invalid email format", success:false});
     }
     try{
         const userExists = await User.findOne({email})
