@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils.js";
+
 
 const doctorSchema = new mongoose.Schema({
 
@@ -58,9 +58,7 @@ const doctorSchema = new mongoose.Schema({
     languages_spoken: [{
         type: String
     }],
-    is_verified: {
-        type: Boolean, default: false
-    },
+
     slots_booked: {
         type:Object, default:{}
     },
