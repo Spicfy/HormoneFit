@@ -1,4 +1,4 @@
-import Call from "../../components/Call";
+import Call from "../../../components/Call";
 
 export default function Page({ params }: { params: { channelName: string } }) {
   return (
