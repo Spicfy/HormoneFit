@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils.js";
+
 
 const doctorSchema = new mongoose.Schema({
 
@@ -24,16 +24,13 @@ const doctorSchema = new mongoose.Schema({
     date_of_birth: {
         type: Date, required: true
     },
-    specialty: {
-        type: String, required: true
-    },
     address: {
         type: String
     },
     phone: {
         type: String, required: true
     },
-    specialty: {
+    specialization: {
         type: String, required: true
     },
     education: [{
@@ -61,9 +58,7 @@ const doctorSchema = new mongoose.Schema({
     languages_spoken: [{
         type: String
     }],
-    is_verified: {
-        type: Boolean, default: false
-    },
+
     slots_booked: {
         type:Object, default:{}
     },

@@ -3,6 +3,9 @@
 :root {
 	--background: #ffffff;
 	--foreground: #171717;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @theme inline {
@@ -21,15 +24,15 @@
 
 body {
 	background: var(--background);
-	color: var(--foreground);
+	
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 @theme {
-	--color-primary: #ffeaea;
-	--color-secondary: #ffdcdc;
-	--color-accent1: #e77a7a;
-	--color-accent2: #f09c9c;
+	--color-primary: #f3e8ff;
+	--color-secondary: #e0cff1;
+	--color-accent1: #a259e6;
+	--color-accent2: #e040fb;
 	--color-secondarytxt: #112335;
 	--color-blacktxt: #090909;
 	--color-whitetxt: #ffffff;

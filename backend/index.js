@@ -5,6 +5,7 @@ import connectDB from "./configs/db.js";
 import "dotenv/config"; //to load environment variables from .env file
 import authRoutes from "./routes/authRoutes.js"; //importing auth routes
 import userRoutes from "./routes/userRoutes.js"; //importing user routes
+import adminRoutes from "./routes/adminRoutes.js";
 
 connectDB();
 //connect to cloudinary for image uploads
@@ -45,7 +46,9 @@ app.get("/", (req, res) => {
 	res.send("Hello, World");
 });
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
+//localhost:4000/api/auth/register => example of endpoint
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
