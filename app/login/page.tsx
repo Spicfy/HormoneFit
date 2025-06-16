@@ -49,7 +49,7 @@ export default function Login() {
 	};
 
 	return (
-		<div className="min-h-screen bg-[#FFEAEA] flex flex-col">
+		<div className="min-h-screen bg-primary flex flex-col">
 			{/* Brand at top left */}
 			<header className="w-full flex items-center justify-start px-8 py-6">
 				<span className="text-2xl font-bold text-accent1 tracking-tight select-none">Hormone Plus</span>
@@ -57,14 +57,14 @@ export default function Login() {
 
 			{/* Centered login form */}
 			<main className="flex-1 flex flex-col items-center justify-center">
-				<div className="w-full max-w-md bg-white/80 rounded-2xl shadow-md px-8 py-10">
+				<div className="w-full max-w-md bg-whitetxt/80 rounded-2xl shadow-md px-8 py-10">
 					<h1 className="text-4xl font-semibold text-center mb-8 text-blacktxt">Welcome back</h1>
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>
 							<input
 								type="email"
 								placeholder="Email"
-								className="w-full px-4 py-3 rounded-xl bg-white border border-[#B1A8A8]/50 focus:outline-none focus:border-accent2 text-blacktxt"
+								className="w-full px-4 py-3 rounded-xl bg-whitetxt border border-accent1/50 focus:outline-none focus:border-accent2 text-blacktxt"
 								value={formData.email}
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 								required
@@ -74,7 +74,7 @@ export default function Login() {
 							<input
 								type="password"
 								placeholder="Password"
-								className="w-full px-4 py-3 rounded-xl bg-white border border-[#B1A8A8]/50 focus:outline-none focus:border-accent2 text-blacktxt"
+								className="w-full px-4 py-3 rounded-xl bg-whitetxt border border-accent1/50 focus:outline-none focus:border-accent2 text-blacktxt"
 								value={formData.password}
 								onChange={(e) => setFormData({ ...formData, password: e.target.value })}
 								required
@@ -109,7 +109,7 @@ export default function Login() {
 							</Link>
 						</div>
 						<div className="text-center">
-							<p className="text-sm text-gray-600">
+							<p className="text-sm text-secondarytxt">
 								Don't have an account?{' '}
 								<Link
 									href="/signup"
@@ -119,12 +119,12 @@ export default function Login() {
 								</Link>
 							</p>
 						</div>
-						<p className="text-xs text-center text-gray-500">
+						<p className="text-xs text-center text-secondarytxt/70">
 							By signing in, you are agreeing to{' '}
 							<Link href="/terms" className="text-accent1 hover:text-accent2 transition-colors">Terms of Use</Link>{' '}and{' '}
 							<Link href="/privacy" className="text-accent1 hover:text-accent2 transition-colors">Privacy Policy</Link>.
 						</p>
-						<p className="text-xs text-center text-gray-500">
+						<p className="text-xs text-center text-secondarytxt/70">
 							Hormone Fit intake assessments do not constitute medical care. A Felix healthcare practitioner will be assigned to you after submission to approve your treatment.
 						</p>
 					</div>
