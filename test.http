@@ -1,0 +1,117 @@
+POST http://localhost:4000/api/doctor/register
+Content-Type: application/json
+
+{
+    "first_name": "Test",
+    "last_name": "1",
+    "email": "dwdwdw@example.com",
+    "password": "securePassword123",
+    "date_of_birth": "1980-05-15",
+    "specialty": "Endocrinologist",
+    "phone": "+1234567890",
+    "education": [
+        {
+            "degree": "MD",
+            "institution": "Harvard Medical School",
+            "year_graduated": 2005,
+            "certification": "Board Certified in Endocrinology"
+        }
+    ],
+    "doctor_fee": 150,
+    "years_of_experience": 18,
+    "consultation_fee": 100,
+    "bio": "Experienced endocrinologist specializing in hormone therapy and metabolic disorders.",
+    "languages_spoken": ["English", "Spanish"],
+    "booking_types": [
+        {
+            "type": "menopause",
+            "duration": 45,
+            "name": "Menopause Consultation",
+            "description": "Comprehensive consultation for menopause-related symptoms and hormone therapy"
+        },
+        {
+            "type": "psychiatry",
+            "duration": 60,
+            "name": "Mental Health Assessment",
+            "description": "In-depth mental health evaluation and treatment planning"
+        },
+        {
+            "type": "other",
+            "duration": 30,
+            "name": "General Consultation",
+            "description": "Standard medical consultation for general health concerns"
+        }
+    ],
+    "weekly_schedule": {
+        "monday": [
+            { "start_time": "09:00", "end_time": "12:00" },
+            { "start_time": "13:00", "end_time": "17:00" }
+        ],
+        "tuesday": [
+            { "start_time": "09:00", "end_time": "12:00" },
+            { "start_time": "13:00", "end_time": "17:00" }
+        ],
+        "wednesday": [
+            { "start_time": "09:00", "end_time": "12:00" },
+            { "start_time": "13:00", "end_time": "17:00" }
+        ],
+        "thursday": [
+            { "start_time": "09:00", "end_time": "12:00" },
+            { "start_time": "13:00", "end_time": "17:00" }
+        ],
+        "friday": [
+            { "start_time": "09:00", "end_time": "12:00" },
+            { "start_time": "13:00", "end_time": "16:00" }
+        ]
+    },
+    "schedule_overrides": [
+        {
+            "date": "2025-06-25",
+            "time_slots": [
+                { "start_time": "10:00", "end_time": "15:00" }
+            ]
+        }
+    ],
+	"bookings": [
+        {
+            "date": "2025-06-20",
+            "time_slots": { "start_time": "12:00", "end_time": "15:00" }
+
+        }
+    ]
+}
+
+### Get All Doctors
+GET http://localhost:4000/api/doctor
+
+### Get Doctor by ID
+GET http://localhost:4000/api/doctor/[doctor_id]
+
+### Update Doctor
+PUT http://localhost:4000/api/doctor/[doctor_id]
+Content-Type: application/json
+
+{
+    "bio": "Updated bio with additional specializations in hormone therapy.",
+    "consultation_fee": 120,
+    "booking_types": [
+        {
+            "type": "menopause",
+            "duration": 45,
+            "name": "Comprehensive Menopause Care",
+            "description": "Detailed consultation for menopause management and hormone therapy"
+        },
+        {
+            "type": "other",
+            "duration": 30,
+            "name": "Follow-up Consultation",
+            "description": "Regular follow-up for ongoing treatment"
+        }
+    ]
+}
+
+
+###
+
+POST http://localhost:4000/api/book
+Content-Type: application/json
