@@ -11,6 +11,7 @@ export default function Cal() {
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [selectedDoctor, setSelectedDoctor] = useState(null);
 	const [selectedBookingType, setSelectedBookingType] = useState(null);
+	const [selectedOperation, setSelectedOperation] = useState(null);
 	const [step, setStep] = useState(1);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ export default function Cal() {
 	const [doctors, setDoctors] = useState([]);
 	const [isLoadingSlots, setIsLoadingSlots] = useState(false);
 	const [filteredDoctors, setFilteredDoctors] = useState([]);
+	const [existingBookings, setExistingBookings] = useState([]);
 
 	const {
 		register,
@@ -59,16 +61,14 @@ export default function Cal() {
 			setError(null);
 
 			try {
-				if (!selectedDoctor) {
+				if (!selectedDoctor || !selectedDate || !selectedBookingType) {
 					setAvailableSlots([]);
 					return;
 				}
 
 				const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-				console.log(dayOfWeek);
 				const dateStr = selectedDate.toISOString().split('T')[0];
 
-				console.log("Test");
 				// Find the doctor's schedule for this day
 				const doctor = doctors.find(d => d._id === selectedDoctor);
 				if (!doctor) {
@@ -83,11 +83,15 @@ export default function Cal() {
 					return;
 				}
 
+				// Get existing bookings for this date
+				const existingBookings = doctor.bookings?.filter(booking =>
+					booking.date.split('T')[0] === dateStr
+				) || [];
+
 				// Check for override schedule first
 				const override = doctor.schedule_overrides?.find(
 					o => o.date.split('T')[0] === dateStr
 				);
-				console.log(doctor.weekly_schedule);
 
 				// Use override slots if they exist, otherwise use weekly schedule
 				const timeSlots = override
@@ -95,24 +99,42 @@ export default function Cal() {
 					: (doctor.weekly_schedule?.[dayOfWeek] || []);
 
 				// Format the slots for display and consider appointment duration
-				const formattedSlots = timeSlots.map(slot => {
+				const formattedSlots = timeSlots.flatMap(slot => {
 					const startTime = new Date(`1970-01-01T${slot.start_time}`);
 					const endTime = new Date(`1970-01-01T${slot.end_time}`);
 					const duration = bookingTypeInfo.duration;
 
-					// Only create slots if there's enough time for the appointment
 					const slots = [];
-					while (startTime.getTime() + (duration * 60000) <= endTime.getTime()) {
-						const slotEndTime = new Date(startTime.getTime() + (duration * 60000));
-						slots.push({
-							start: startTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }),
-							end: slotEndTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }),
-							displayTime: `${startTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })} - ${slotEndTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })}`
+					let currentTime = new Date(startTime);
+
+					while (currentTime.getTime() + (duration * 60000) <= endTime.getTime()) {
+						const slotEndTime = new Date(currentTime.getTime() + (duration * 60000));
+						const slotStartStr = currentTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+						const slotEndStr = slotEndTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+
+						// Check if this slot overlaps with any existing booking
+						const isSlotAvailable = !existingBookings.some(booking => {
+							const bookingStart = new Date(`1970-01-01T${booking.time_slots.start_time}`);
+							const bookingEnd = new Date(`1970-01-01T${booking.time_slots.end_time}`);
+							return (
+								(currentTime >= bookingStart && currentTime < bookingEnd) ||
+								(slotEndTime > bookingStart && slotEndTime <= bookingEnd) ||
+								(currentTime <= bookingStart && slotEndTime >= bookingEnd)
+							);
 						});
-						startTime.setMinutes(startTime.getMinutes() + duration);
+
+						if (isSlotAvailable) {
+							slots.push({
+								start: slotStartStr,
+								end: slotEndStr,
+								displayTime: `${slotStartStr} - ${slotEndStr}`
+							});
+						}
+
+						currentTime.setMinutes(currentTime.getMinutes() + duration);
 					}
 					return slots;
-				}).flat();
+				});
 
 				setAvailableSlots(formattedSlots);
 			} catch (err) {
@@ -122,10 +144,35 @@ export default function Cal() {
 			}
 		};
 
-		if (step === 3 && selectedDoctor) {
+		if (step === 4 && selectedDoctor && selectedDate && selectedBookingType) {
 			fetchAvailableSlots();
 		}
 	}, [selectedDate, selectedDoctor, step, doctors, selectedBookingType]);
+
+	// Add function to fetch existing bookings
+	const fetchExistingBookings = async (doctorId, date) => {
+		try {
+			const response = await axios.get(`http://localhost:4000/api/doctor/${doctorId}`);
+			if (response.data.success) {
+				const doctor = response.data.data;
+				const dateStr = date.toISOString().split('T')[0];
+				const bookingsForDate = doctor.bookings?.filter(booking =>
+					new Date(booking.date).toISOString().split('T')[0] === dateStr
+				) || [];
+				setExistingBookings(bookingsForDate);
+			}
+		} catch (err) {
+			console.error("Error fetching bookings:", err);
+			setExistingBookings([]);
+		}
+	};
+
+	// Update useEffect to fetch bookings when date or doctor changes
+	useEffect(() => {
+		if (selectedDoctor && selectedDate) {
+			fetchExistingBookings(selectedDoctor, selectedDate);
+		}
+	}, [selectedDoctor, selectedDate]);
 
 	// Handle form submission
 	const onSubmit = async (data) => {
@@ -133,19 +180,13 @@ export default function Cal() {
 		setError(null);
 
 		try {
-			const bookingData = {
-				...data,
-				doctor_id: selectedDoctor,
-				booking_type: selectedBookingType,
-				date: selectedDate.toISOString(),
-				time: selectedTime,
-			};
+			const bookingData = { ...data, doctor_id: selectedDoctor, booking_type: selectedBookingType, booking: { date: new Date(selectedDate.toISOString()), time_slots: { start_time: selectedTime.start, end_time: selectedTime.end } } };
 
-			const response = await axios.post("/api/bookings", bookingData);
+			const response = await axios.post("http://localhost:4000/api/appointment/book", bookingData);
 
 			if (response.data.success) {
 				setBookingConfirmed(true);
-				setStep(5);
+				setStep(6);
 				reset();
 			} else {
 				setError(response.data.message || "Failed to book appointment");
@@ -205,14 +246,14 @@ export default function Cal() {
 
 					{/* Progress Steps */}
 					<div className="flex justify-center mb-8">
-						{[1, 2, 3, 4, 5].map((stepNumber) => (
+						{[1, 2, 3, 4, 5, 6].map((stepNumber) => (
 							<motion.div
 								key={stepNumber}
 								initial={{ opacity: 0, scale: 0.5 }}
 								animate={{ opacity: 1, scale: 1 }}
 								transition={{ delay: stepNumber * 0.1 }}
 								className={`flex items-center ${
-									stepNumber < 5 ? "w-24" : ""
+									stepNumber < 6 ? "w-24" : ""
 								}`}
 							>
 								<div
@@ -224,7 +265,7 @@ export default function Cal() {
 								>
 									{stepNumber}
 								</div>
-								{stepNumber < 5 && (
+								{stepNumber < 6 && (
 									<div
 										className={`h-1 w-full ${
 											step > stepNumber
@@ -315,60 +356,109 @@ export default function Cal() {
 						</motion.div>
 					)}
 
-					{/* Calendar View */}
-					{step === 3 && (
+					{/* Operation Selection */}
+					{step === 3 && selectedDoctor && (
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							className="grid grid-cols-1 gap-4 mb-8"
+						>
+							<h2 className="text-xl font-semibold mb-4">Select Operation Type</h2>
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+								{doctors.find(d => d._id === selectedDoctor)?.booking_types
+									.filter(type => type.type === selectedBookingType)
+									.map((operation) => (
+										<motion.button
+											key={operation.name}
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}
+											onClick={() => {
+												setSelectedOperation(operation);
+												setStep(4);
+											}}
+											className={`p-6 rounded-lg text-left transition-colors border ${
+												selectedOperation?.name === operation.name
+													? "border-blue-500 bg-blue-50"
+													: "border-gray-200 hover:border-blue-300"
+											}`}
+										>
+											<div className="font-medium">{operation.name}</div>
+											<div className="text-sm text-gray-600 mt-2">
+												{operation.description}
+											</div>
+											<div className="text-sm text-blue-600 mt-2">
+												Duration: {operation.duration} minutes
+											</div>
+										</motion.button>
+									))}
+							</div>
+						</motion.div>
+					)}
+
+					{/* Calendar View - Now step 4 */}
+					{step === 4 && (
 						<>
 							<Calender
-								setStep={(x) => {
-									setStep(x);
-								}}
-								setSelectedDate={(x) => {
-									setSelectedDate(x);
-								}}
+								setStep={setStep}
+								setSelectedDate={setSelectedDate}
+								selectedOperation={selectedOperation}
+								existingBookings={existingBookings}
 							/>
 							{selectedDate && (
 								<div className="mt-4">
 									<h3 className="text-lg font-semibold mb-2">
 										Available Times for {selectedDate.toLocaleDateString()}
 									</h3>
-									<div className="grid grid-cols-3 gap-4">
-										{isLoadingSlots ? (
-											<div className="col-span-3 text-center py-8">
-												<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-												<p className="mt-2 text-gray-600">Loading available slots...</p>
-											</div>
-										) : availableSlots.length > 0 ? (
-											availableSlots.map((slot, index) => (
-												<motion.button
-													key={index}
-													whileHover={{ scale: 1.05 }}
-													whileTap={{ scale: 0.95 }}
-													onClick={() => {
-														setSelectedTime(slot.displayTime);
-														setStep(4);
-													}}
-													className={`p-4 rounded-lg text-center transition-colors ${
-														slot.displayTime === selectedTime
-															? "bg-blue-500 text-white"
-															: "border border-gray-200 hover:bg-blue-50"
-													}`}
-												>
-													{slot.displayTime}
-												</motion.button>
-											))
-										) : (
-											<div className="col-span-3 text-center py-8">
-												<p className="text-gray-600">No available slots for this date</p>
-											</div>
-										)}
-									</div>
+									{isLoadingSlots ? (
+										<div className="text-center py-8">
+											<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+											<p className="mt-2 text-gray-600">Loading available slots...</p>
+										</div>
+									) : availableSlots.length > 0 ? (
+										<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+											{availableSlots
+												.filter(slot => {
+													// Filter out slots that conflict with existing bookings
+													return !existingBookings.some(booking => {
+														const bookingStart = booking.time_slots.start_time;
+														const bookingEnd = booking.time_slots.end_time;
+														return (
+															(slot.start <= bookingEnd && slot.end >= bookingStart) ||
+															(bookingStart <= slot.end && bookingEnd >= slot.start)
+														);
+													});
+												})
+												.map((slot, index) => (
+													<motion.button
+														key={index}
+														whileHover={{ scale: 1.05 }}
+														whileTap={{ scale: 0.95 }}
+														onClick={() => {
+															setSelectedTime(slot);
+															setStep(5);
+														}}
+														className={`p-4 rounded-lg text-center transition-colors ${
+															slot.displayTime === selectedTime?.displayTime
+																? "bg-blue-500 text-white"
+																: "bg-white border border-gray-200 hover:bg-blue-50 hover:border-blue-300"
+														}`}
+													>
+														{slot.displayTime}
+													</motion.button>
+												))}
+										</div>
+									) : (
+										<div className="text-center py-8 bg-gray-50 rounded-lg">
+											<p className="text-gray-600">No available slots for this date. Please select a different date.</p>
+										</div>
+									)}
 								</div>
 							)}
 						</>
 					)}
 
-					{/* Details Form */}
-					{step === 4 && (
+					{/* Details Form - Now step 5 */}
+					{step === 5 && (
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -474,8 +564,8 @@ export default function Cal() {
 						</motion.div>
 					)}
 
-					{/* Confirmation Step */}
-					{step === 5 && bookingConfirmed && (
+					{/* Confirmation Step - Now step 6 */}
+					{step === 6 && bookingConfirmed && (
 						<motion.div
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
@@ -521,9 +611,9 @@ export default function Cal() {
 								transition={{ delay: 0.3 }}
 								className="text-gray-600 mb-6"
 							>
-								Your {doctors.find(d => d._id === selectedDoctor)?.booking_types.find(t => t.type === selectedBookingType)?.name} appointment has been scheduled for{" "}
+								Your appointment for {selectedOperation?.name} has been scheduled for{" "}
 								{selectedDate.toLocaleDateString()} at{" "}
-								{selectedTime} with Dr. {doctors.find(d => d._id === selectedDoctor)?.last_name}.
+								{selectedTime?.displayTime} with Dr. {doctors.find(d => d._id === selectedDoctor)?.last_name}.
 								<br />A confirmation email has been sent to your
 								inbox.
 							</motion.p>
@@ -539,6 +629,7 @@ export default function Cal() {
 									setSelectedTime(null);
 									setSelectedDoctor(null);
 									setSelectedBookingType(null);
+									setSelectedOperation(null);
 									setBookingConfirmed(false);
 								}}
 								className="text-blue-500 hover:text-blue-600"
@@ -550,7 +641,7 @@ export default function Cal() {
 
 					{/* Navigation Buttons */}
 					<div className="flex justify-between mt-8">
-						{step > 1 && step !== 5 && (
+						{step > 1 && step !== 6 && (
 							<motion.button
 								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.95 }}

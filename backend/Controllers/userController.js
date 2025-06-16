@@ -1,48 +1,66 @@
 // API to book appointment
+import React from "react";
 import Appointment from "../Models/Appointment.js";
 import Doctor from "../Models/Doctor.js";
-import User from "../Models/User.js";
-
-
-
 
 
 export const bookAppointment = async (req, res) => {
-    try{
-        const {userId, doctorId, date, start_time, end_time, type} = req.body
+    try {
+        const { user_id, doctor_id, booking:times, booking_type, notes } = req.body;
 
-        const docData= await Doctor.findById(doctorId).select('-password');
-        if(!docData.available){
-            return res.json({success: false, message: "Doctor is not available for booking at this time."});
+        const docData = await Doctor.findById(doctor_id).select('-password');
+
+        if (!docData) {
+            return res.status(404).json({
+                success: false,
+                message: `No Doctor Found with ID: ${doctor_id}`
+            });
         }
-        const userData = await User.findById(userId).select('-password');
-        if(!userData){
-            return res.json({success: false, message: "User not found."});
-        }
+
+		const bookings = docData.bookings?.filter(
+			o => (o.date.toISOString() === times.date));
+
+
+		for(const books of bookings){
+			console.log(books.time_slots.start_time <= times.time_slots.start_time && times.time_slots.start_time <= books.time_slots.end_time);
+			if((books.time_slots.start_time <= times.time_slots.start_time && times.time_slots.start_time <= books.time_slots.end_time ) ||
+			(books.time_slots.start_time <= times.time_slots.end_time && times.time_slots.end_time <= books.time_slots.end_time ) ||
+			(times.time_slots.start_time <= books.time_slots.start_time && times.time_slots.end_time >= books.time_slots.end_tim )
+			){
+				return res.json({success: false, message: "Slot already booked."});
+			}
+		}
+
+        // const userData = await User.findById(user_id).select('-password');
+        // if(!userData){
+        //     return res.json({success: false, message: "User not found."});
+        // }
+
         const booking = new Appointment({
-
-            user_id: userId,
-            doctor_id: doctorId,
-            appointment_date: date,
-            appointment_start_time: start_time,
-            appointment_end_time: end_time,
-            type: type,
-            fee: docData.doctor_fee
+            user_id: user_id || "684c5466e5afd34b55e346b6",
+            doctor_id: doctor_id,
+            appointment_date: times.date,
+            start_time: times.time_slots.start_time,
+            end_time: times.time_slots.end_time,
+			notes: notes,
+            type: booking_type,
+            // status: status,
         })
+
         const savedBooking = await booking.save();
 
 
-        await doctorModel.findByIdAndUpdate(doctorId, {slots_booked});
+        await Doctor.findByIdAndUpdate(doctor_id, {bookings: [...docData.bookings, times]});
 
         res.json({success: true, message: "Appointment booked successfully", booking: savedBooking});
-        
+
 
 
     }catch(error){
         res.json({success: false, message: error.message})
     }
     //cancel appointment API
- 
+
 }
     export const cancelAppointment = async (req, res) => {
         try{
@@ -54,7 +72,7 @@ export const bookAppointment = async (req, res) => {
                 return res.json({success: false, message: "You are not authorized to cancel to cancel this appointment."})
             }
             await Appointment.findByIdAndUpdate(AppointmentId, {cancelled: true, status: 'cancelled' })
-            
+
 
         }catch(error){
         res.json({success: false, message: error.message});
@@ -62,7 +80,7 @@ export const bookAppointment = async (req, res) => {
 }
 
 export const listAppointments = async (req, res) => {
-    try{    
+    try{
         const {userId} = req.body;
 
         const appointments = await Appointment.find({user_id: userId})

@@ -5,7 +5,7 @@ import 'dotenv/config'; //to load environment variables from .env file
 import authRoutes from './routes/authRoutes.js'; //importing auth routes
 import userRoutes from './routes/userRoutes.js'; //importing user routes
 import doctorRoutes from './routes/doctorRoutes.js'; //importing doctor routes
-
+import appointmentRoutes from './routes/appointmentRoutes.js'; //importing appointment routes
 connectDB();
  //connect to cloudinary for image uploads
 //load environment variables from .env file
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes);
 app.use('/api/doctor', doctorRoutes);
+app.use('/api/appointment', appointmentRoutes);
 
 
 app.listen(PORT, ()=> {

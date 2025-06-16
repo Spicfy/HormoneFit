@@ -8,19 +8,22 @@ export const test = async (req, res) => {
 
 export const register = async (req, res) => {
     const {
-        first_name,
-        last_name,
-        email,
-        date_of_birth,
-        specialty,
-        phone,
-        education,
-        doctor_fee,
-        years_of_experience,
-        consultation_fee,
-        bio,
-        languages_spoken,
-        weekly_schedule,
+		first_name,
+		last_name,
+		email,
+		profile_picture,
+		professional_photo,
+		date_of_birth,
+		specialty,
+		address,
+		phone,
+		education,
+		years_of_experience,
+		bio,
+		languages_spoken,
+		weekly_schedule,
+		schedule_overrides,
+		bookings,
 		booking_types
     } = req.body;
 
@@ -41,28 +44,25 @@ export const register = async (req, res) => {
             });
         }
 
-        const doctor = new Doctor({
+
+        const savedDoctor = await Doctor.create({
             _id: new mongoose.Types.ObjectId(),
-            first_name,
-            last_name,
-            email,
-            date_of_birth,
-            specialty,
-            phone,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            date_of_birth: date_of_birth,
+            specialty: specialty,
+            phone: phone,
             education: education || [],
-            doctor_fee,
-            years_of_experience,
-            consultation_fee,
-            bio,
+            years_of_experience: years_of_experience || 0,
+            bio: bio || "",
             languages_spoken: languages_spoken || [],
             weekly_schedule: weekly_schedule || {},
-            schedule_overrides: [],
-            slots_booked: {},
+            schedule_overrides: schedule_overrides || [],
+            bookings: bookings || [],
 			booking_types: booking_types || [],
             is_verified: false
         });
-
-        const savedDoctor = await doctor.save();
 
         return res.status(201).json({
             success: true,
@@ -106,9 +106,8 @@ export const getAllDoctors = async (req, res) => {
 
 export const getDoctorById = async (req, res) => {
     try {
-		const params = await React.use(req.params)
+		const params = await req.params
         const doctor = await Doctor.findById(params.id)
-            .select('-slots_booked');
 
         if (!doctor) {
             return res.status(404).json({

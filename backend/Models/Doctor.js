@@ -3,8 +3,8 @@ import { unique } from "next/dist/build/utils.js";
 
 const timeSlotSchema = new mongoose.Schema(
 	{
-		start_time: { type: String, required: true }, // Format: "HH:mm"
-		end_time: { type: String, required: true }, // Format: "HH:mm"
+		start_time: { type: String, required: true },
+		end_time: { type: String, required: true },
 	},
 	{ _id: false },
 );
@@ -60,10 +60,6 @@ const doctorSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		specialty: {
-			type: String,
-			required: true,
-		},
 		education: [
 			{
 				degree: { type: String, required: true },
@@ -72,18 +68,7 @@ const doctorSchema = new mongoose.Schema(
 				certification: { type: String },
 			},
 		],
-		doctor_fee: {
-			type: Number,
-		},
 		years_of_experience: {
-			type: Number,
-		},
-
-		available: {
-			type: Boolean,
-			default: true,
-		},
-		consultation_fee: {
 			type: Number,
 		},
 		bio: {
@@ -111,6 +96,12 @@ const doctorSchema = new mongoose.Schema(
 			{
 				date: { type: Date, required: true },
 				time_slots: [timeSlotSchema],
+			},
+		],
+		bookings: [
+			{
+				date: { type: Date, required: true },
+				time_slots: { type: timeSlotSchema, required: true },
 			},
 		],
 		booking_types: [appointmentTypeSchema],

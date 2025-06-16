@@ -1,11 +1,12 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Calender({ setStep, setSelectedDate }) {
+export default function Calender({ setStep, setSelectedDate, selectedOperation, existingBookings }) {
 	const [currentMonth, setCurrentMonth] = useState(new Date());
 	const [slideDirection, setSlideDirection] = useState(0);
+	const [fullyBookedDates, setFullyBookedDates] = useState(new Set());
 
 	const getMaxBookingDate = () => {
 		const maxDate = new Date();
@@ -65,6 +66,58 @@ export default function Calender({ setStep, setSelectedDate }) {
 		}
 	};
 
+	// Function to check if a date is fully booked
+	const isDateFullyBooked = (date) => {
+		const dateStr = date.toISOString().split('T')[0];
+		const bookingsForDate = existingBookings.filter(booking =>
+			new Date(booking.date).toISOString().split('T')[0] === dateStr
+		);
+
+		// If there are no bookings for this date, it's not fully booked
+		if (bookingsForDate.length === 0) return false;
+
+		// Get all possible time slots for the day (assuming 9 AM to 5 PM)
+		const allSlots = [];
+		let currentTime = new Date(date);
+		currentTime.setHours(9, 0, 0, 0); // Start at 9 AM
+		const endTime = new Date(date);
+		endTime.setHours(17, 0, 0, 0); // End at 5 PM
+
+		while (currentTime < endTime) {
+			const slotEnd = new Date(currentTime.getTime() + (selectedOperation?.duration || 30) * 60000);
+			if (slotEnd <= endTime) {
+				allSlots.push({
+					start: currentTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+					end: slotEnd.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })
+				});
+			}
+			currentTime = slotEnd;
+		}
+
+		// Check if all slots are booked
+		return allSlots.every(slot =>
+			bookingsForDate.some(booking =>
+				(slot.start <= booking.time_slots.end_time && slot.end >= booking.time_slots.start_time) ||
+				(booking.time_slots.start_time <= slot.end && booking.time_slots.end_time >= slot.start)
+			)
+		);
+	};
+
+	// Update fully booked dates when existingBookings changes
+	useEffect(() => {
+		const bookedDates = new Set();
+		const today = new Date();
+		const maxDate = getMaxBookingDate();
+
+		// Check each date in the booking range
+		for (let d = new Date(today); d <= maxDate; d.setDate(d.getDate() + 1)) {
+			if (isDateFullyBooked(new Date(d))) {
+				bookedDates.add(d.toISOString().split('T')[0]);
+			}
+		}
+		setFullyBookedDates(bookedDates);
+	}, [existingBookings, selectedOperation]);
+
 	// Generate calendar days for current month
 	const generateCalendarDays = () => {
 		const year = currentMonth.getFullYear();
@@ -84,18 +137,18 @@ export default function Calender({ setStep, setSelectedDate }) {
 		// Add the days of the month
 		for (let day = 1; day <= daysInMonth; day++) {
 			const date = new Date(year, month, day);
-			// Only allow selecting current or future dates within max booking range
-			const isPast =
-				date <
-				new Date(
-					today.getFullYear(),
-					today.getMonth(),
-					today.getDate(),
-				);
+			const dateStr = date.toISOString().split('T')[0];
+
+			// Check if date is selectable
+			const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
 			const isFuture = date > maxDate;
+			const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+			const isFullyBooked = fullyBookedDates.has(dateStr);
+
 			days.push({
 				date,
-				isSelectable: !isPast && !isFuture,
+				isSelectable: !isPast && !isFuture && !isWeekend && !isFullyBooked,
+				isFullyBooked
 			});
 		}
 
@@ -238,33 +291,33 @@ export default function Calender({ setStep, setSelectedDate }) {
 									<motion.button
 										whileHover={
 											dayInfo.isSelectable
-												? {
-														scale: 1.1,
-
-													}
+												? { scale: 1.1 }
 												: {}
 										}
 										whileTap={
 											dayInfo.isSelectable
-												? {
-														scale: 0.95,
-													}
+												? { scale: 0.95 }
 												: {}
 										}
 										onClick={() => {
 											if (dayInfo.isSelectable) {
 												setSelectedDate(dayInfo.date);
-												setStep(2);
+												setStep(4);
 											}
 										}}
 										disabled={!dayInfo.isSelectable}
 										className={`w-full h-full rounded-lg flex items-center justify-center transition-colors ${
-											dayInfo.isSelectable
-												? "hover:bg-blue-50"
-												: "text-gray-300 cursor-not-allowed"
+											dayInfo.isFullyBooked
+												? "bg-red-50 text-red-400 cursor-not-allowed"
+												: dayInfo.isSelectable
+												? "hover:bg-blue-50 cursor-pointer"
+												: "text-gray-300 cursor-not-allowed bg-gray-50"
 										}`}
 									>
 										{dayInfo.date.getDate()}
+										{dayInfo.isFullyBooked && (
+											<span className="absolute text-xs text-red-400">Booked</span>
+										)}
 									</motion.button>
 								)}
 							</div>
