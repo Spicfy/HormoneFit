@@ -18,14 +18,14 @@ export default function TreatmentsPage() {
 	return (
 		<main className="bg-gradient-to-b from-whitetxt to-accent1/5 min-h-screen font-sans text-blacktxt">
 			{/* Main Heading Section */}
-			<section className="px-8 py-24 text-center bg-gradient-to-r from-primary to-secondary">
+			<section className="bg-gradient-to-r from-accent1 to-accent2 px-8 py-25 text-center">
 				<div className="max-w-4xl mx-auto">
-					<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent mb-4 leading-tight">
-						Comprehensive Menopause Treatments
+					<h1 className="text-4xl md:text-6xl font-bold text-whitetxt leading-tight">
+						Comprehensive Menopause Treatments		
 					</h1>
-					<p className="text-lg text-secondarytxt font-normal max-w-2xl mx-auto">
-						Evidence-based treatments tailored to your unique symptoms and health history.
-					</p>
+					<h2 className="text-white">Evidence-based treatments tailored to your unique symptoms and health history.</h2>
+
+					
 				</div>
 			</section>
 

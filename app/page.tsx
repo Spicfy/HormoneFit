@@ -228,7 +228,7 @@ export default function Home() {
 							{/* Card 1 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent1/10 mb-4">
-									<img src="/leaf.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Hormone Therapy</h3>
 								<p className="text-secondarytxt">
@@ -238,7 +238,7 @@ export default function Home() {
 							{/* Card 2 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent2/10 mb-4">
-									<img src="/pill.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Non-Hormonal Medications</h3>
 								<p className="text-secondarytxt">
@@ -248,7 +248,7 @@ export default function Home() {
 							{/* Card 3 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent1/10 mb-4">
-									<img src="/lifestyle.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 						</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Lifestyle Modifications</h3>
 								<p className="text-secondarytxt">
@@ -258,7 +258,7 @@ export default function Home() {
 							{/* Card 4 */}
 							<div className="bg-whitetxt rounded-2xl border border-accent2/30 shadow p-8 flex flex-col">
 								<div className="w-12 h-12 flex items-center justify-center rounded-full bg-accent2/10 mb-4">
-									<img src="/supplement.svg" alt="" className="w-7 h-7" />
+									<img src="/heart.svg" alt="" className="w-7 h-7" />
 								</div>
 								<h3 className="text-xl font-bold text-blacktxt mb-2">Supplements & Products</h3>
 								<p className="text-secondarytxt">
@@ -299,7 +299,7 @@ export default function Home() {
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
 							{/* Pay Per Visit */}
 							<div className="bg-whitetxt rounded-2xl shadow p-8 flex flex-col items-center border border-accent2/30">
-								<h3 className="text-xl font-bold text-blacktxt mb-2">Pay Per Visit</h3>
+								<h3 className="text-xl font-bold text-blacktxt mb-2">HormoneFit</h3>
 								<p className="text-secondarytxt mb-4">For occasional care needs</p>
 								<div className="text-4xl font-bold text-blacktxt mb-1">$125 <span className="text-base font-normal text-secondarytxt">per visit</span></div>
 								<ul className="text-secondarytxt text-base space-y-2 mb-8 mt-4 w-full">
@@ -313,8 +313,8 @@ export default function Home() {
 							</div>
 							{/* Membership */}
 							<div className="bg-whitetxt rounded-2xl shadow-lg p-8 flex flex-col items-center border-2 border-accent2 relative scale-105 z-10">
-								<span className="absolute top-4 right-4 bg-accent1 text-white text-xs font-bold px-3 py-1 rounded-full">★ Most Popular</span>
-								<h3 className="text-xl font-bold text-blacktxt mb-2">Membership</h3>
+								<span className="absolute top-4 right-4 bg-accent1 text-white text-xs font-bold px-3 py-0.9 rounded-full">★ Most Popular</span>
+								<h3 className="text-xl font-bold text-blacktxt mb-2">HormoneFit+</h3>
 								<p className="text-secondarytxt mb-4">Comprehensive ongoing care</p>
 								<div className="text-4xl font-bold text-blacktxt mb-1">
 									{isYearly ? "$499" : "$49"}
@@ -365,10 +365,10 @@ export default function Home() {
 									<span className="text-secondarytxt/50">|</span>
 									Insurance receipts provided
 								</span>
-							</div>
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 
 
 				<div className="px-8 md:px-24 py-30 text-center mb-12">
@@ -405,25 +405,12 @@ export default function Home() {
 							{showAllReviews ? "Show Less" : "Show More Reviews"}
 						</button>
 
-
+						
 					</div>
 				</div>
 
-				{/* FAQ Section - Menopause themed, styled to match */}
-				<div className="w-full flex flex-col md:flex-row justify-center items-start gap-20 px-8 md:px-24 py-20">
-					{/* Left: Heading/Intro */}
-					<div className="md:w-1/3 w-full mb-10 md:mb-0">
-						<h2 className="text-4xl md:text-7xl font-bold mb-6 text-left bg-gradient-to-r from-accent1 to-accent2 bg-clip-text text-transparent">Frequently Asked Questions</h2>
-						<p className="text-lg text-secondarytxt mb-2 text-left">Everything you want to know about menopause care, HormoneFit, and how we support your journey.</p>
-						<a href="#contact" className="inline-block mt-4 bg-gradient-to-r from-accent1 to-accent2 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:scale-105 hover:shadow-lg transition">Contact Us</a>
-					</div>
-					{/* Right: Accordion */}
-					<div className="md:w-2/3 w-full">
-						<FAQAccordion />
-					</div>
-				</div>
-
-				{/* CTA Section */}
+				
+				{/* CTA Section - Existing */}
 				<section
 					className="w-full py-24 px-4 flex flex-col items-center justify-center"
 					style={{
@@ -431,72 +418,62 @@ export default function Home() {
 					}}
 				>
 					<h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-4">
-						Ready to Take Control of Your Menopause Journey?
+						Ready to Transform Your Menopause Experience?
 					</h2>
 					<p className="text-lg text-white text-center mb-8 max-w-2xl">
-						Join thousands of Canadian women who have transformed their menopause experience with HormoneFit.
+						Schedule a consultation with one of our menopause specialists today and take the first step
+						toward comprehensive, personalized menopause care
 					</p>
-					<a
-						href="/quiz"
-						className="bg-white text-accent1 font-semibold rounded-lg px-8 py-3 shadow hover:bg-accent2 hover:text-white transition"
+					<Link
+						href="/consultation" // Placeholder link
+						className="bg-whitetxt text-accent1 font-semibold rounded-lg px-8 py-3 shadow hover:bg-accent2 hover:text-white transition"
 					>
-						Take the Quiz
-					</a>
+						Book a Consultation
+					</Link>
 				</section>
 
-		
+
+
 			</main>
 		</div>
 	);
 }
 
-function FAQAccordion() {
-	const [open, setOpen] = React.useState<number | null>(null);
-	const faqs = [
-		{
-			q: "What symptoms can HormoneFit help with?",
-			a: "HormoneFit supports a wide range of menopause symptoms, including hot flashes, sleep issues, mood changes, brain fog, weight changes, and more. Your care plan is tailored to your unique needs."
-		},
-		{
-			q: "Do I need a referral to join?",
-			a: "No referral is needed. You can get started by taking our online quiz and booking your first consultation directly."
-		},
-		{
-			q: "Is HormoneFit available across Canada?",
-			a: "Yes! Our virtual care platform is available to women in most provinces and territories across Canada."
-		},
-		{
-			q: "How are treatments personalized?",
-			a: "Our clinicians review your symptoms, health history, and goals to create a plan just for you. We adjust your treatment as your needs change."
-		},
-		{
-			q: "Can I talk to a real doctor?",
-			a: "Absolutely. All consultations are with licensed Canadian healthcare professionals who specialize in menopause care."
-		},
-		{
-			q: "What if my symptoms change?",
-			a: "You can message your care team anytime and book follow-ups as needed. We're here to support you as your needs evolve."
-		}
-	];
+interface FAQItemProps {
+	question: string;
+	answer: string;
+}
+
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
-		<div className="flex flex-col">
-			{faqs.map((item, idx) => (
-				<div key={idx} className="border-b border-accent1/20">
-					<button
-						className={`w-full text-left px-0 py-6 flex justify-between items-center focus:outline-none transition-colors ${open === idx ? 'font-bold text-accent1 text-xl' : 'font-semibold text-lg text-blacktxt'}`}
-						onClick={() => setOpen(open === idx ? null : idx)}
-						aria-expanded={open === idx}
-					>
-						<span className="text-left">{item.q}</span>
-						<span className={`ml-4 transition-transform duration-200 text-2xl text-accent1/70 ${open === idx ? 'rotate-180 text-accent1' : ''}`}>⌄</span>
-					</button>
-					{open === idx && (
-						<div className="pl-0 pr-8 pb-6 text-secondarytxt text-base animate-fade-in">
-							{item.a}
-						</div>
-					)}
-				</div>
-			))}
+		<div className="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+			<button
+				className="flex justify-between items-center w-full text-left font-semibold text-lg py-3 text-primary hover:text-accent1 transition-colors duration-200"
+				onClick={() => setIsOpen(!isOpen)}
+			>
+				{question}
+				<svg
+					className={`w-5 h-5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
+						d={isOpen ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"}
+					></path>
+				</svg>
+			</button>
+			{isOpen && (
+				<p className="text-secondarytxt text-base pt-2 pb-3 pr-6">
+					{answer}
+				</p>
+			)}
 		</div>
 	);
-}
+};

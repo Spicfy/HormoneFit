@@ -1,42 +1,56 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
-	const [show, setShow] = useState(true);
-	const [lastScrollY, setLastScrollY] = useState(0);
+	const [show, setShow] = useState(true); // Initial state is always true for SSR
+	const lastScrollY = useRef(0); // Use useRef for scroll position
+	const [isMounted, setIsMounted] = useState(false); // New state to track if component is mounted on client
 
 	useEffect(() => {
+		setIsMounted(true); // Component has mounted on client
+
 		const handleScroll = () => {
 			if (typeof window !== "undefined") {
-				if (window.scrollY > lastScrollY) {
-					// if scroll down hide the navbar
+				if (window.scrollY > lastScrollY.current) {
 					setShow(false);
 				} else {
-					// if scroll up show the navbar
 					setShow(true);
 				}
-				setLastScrollY(window.scrollY);
+				lastScrollY.current = window.scrollY; // Update ref
 			}
 		};
 
-		// add event listener
 		if (typeof window !== "undefined") {
+			// Initialize show based on current scroll position only after client-side mount
+			if (window.scrollY > 0) {
+				setShow(false);
+			} else {
+				setShow(true);
+			}
+			lastScrollY.current = window.scrollY; // Set initial lastScrollY
+
 			window.addEventListener("scroll", handleScroll);
 
-			// clean up function
 			return () => {
 				window.removeEventListener("scroll", handleScroll);
 			};
 		}
-	}, [lastScrollY]);
+	}, []); // Empty dependency array, runs once on client mount
+
+	// Base classes always present on both server and client
+	const baseClasses = `fixed w-full top-0 bg-whitetxt border-b border-accent1/20 text-blacktxt font-medium z-20`;
+
+	// Dynamic classes for animation, only applied on client after mounting
+	const dynamicAnimationClasses = isMounted ? 
+		`transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}` : 
+		"translate-y-0"; // Ensure consistent initial render: always visible and no transition on server/initial client
 
 	return (
 		<header
-			className={`fixed w-full top-0 bg-whitetxt border-b border-accent1/20 text-blacktxt font-medium z-20 transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}
-			}`}
+			className={`${baseClasses} ${dynamicAnimationClasses}`}
 		>
 			<div className="container mx-auto px-4 py-4 flex justify-between items-center">
 				{/* Logo */}
@@ -50,7 +64,7 @@ export default function Header() {
 					<nav className="hidden md:flex space-x-6">
 						<Link href="/about" className="hover:text-accent1 transition-colors">About</Link>
 						<Link href="/treatments" className="hover:text-accent1 transition-colors">Treatments</Link>
-						<Link href="/pricing" className="hover:text-accent1 transition-colors">Pricing</Link>
+						<Link href="/price" className="hover:text-accent1 transition-colors">Pricing</Link>
 						<Link href="/faq" className="hover:text-accent1 transition-colors">FAQ</Link>
 						<Link href="/contact" className="hover:text-accent1 transition-colors">Contact</Link>
 					</nav>
